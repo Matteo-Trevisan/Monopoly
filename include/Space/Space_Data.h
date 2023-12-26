@@ -1,6 +1,3 @@
-//
-// Created by Matteo Trevisan on 26/12/23.
-//
 
 #ifndef SPACE_DATA_H
 #define SPACE_DATA_H

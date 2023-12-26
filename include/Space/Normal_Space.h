@@ -1,6 +1,3 @@
-//
-// Created by Matteo Trevisan on 26/12/23.
-//
 
 #ifndef NORMAL_SPACE_H
 #define NORMAL_SPACE_H
