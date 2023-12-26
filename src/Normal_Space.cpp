@@ -38,7 +38,7 @@ void Normal_Space::upgrade() {
 }
 
 void Normal_Space::reset() {
-
+	//TODO Implement reset function
 }
 
 int Normal_Space::get_overnight_stay_price() {
