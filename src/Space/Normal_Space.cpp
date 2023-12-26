@@ -2,7 +2,7 @@
 // Created by Matteo Trevisan on 26/12/23.
 //
 
-#include "Normal_Space.h"
+#include "Space/Normal_Space.h"
 
 int Normal_Space::get_terrain_sale_price() {
 	return data.terrain_sale;

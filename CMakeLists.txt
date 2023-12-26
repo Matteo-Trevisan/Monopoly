@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.00 FATAL_ERROR)
 project(Monopoly)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -10,15 +10,17 @@ add_executable(Monopoly
         src/main.cpp)
 
 add_library(Space
-        src/Space.cpp
-        include/space.h
-        src/Normal_Space.cpp
-        include/Normal_Space.h
-        include/Space_Data.h
-        src/Angular_Space.cpp
-        include/Angular_Space.h
-        src/Start_Space.cpp
-        include/Start_Space.h
+        include/Space/Space.h
+        include/Space/Normal_Space.h
+        include/Space/Angular_Space.h
+        include/Space/Start_Space.h
+        include/Space/Space_Data.h
+        src/Space/Space.cpp
+        src/Space/Normal_Space.cpp
+        src/Space/Angular_Space.cpp
+        src/Space/Start_Space.cpp
 )
 
-target_link_libraries(Monopoly Space)
+target_link_libraries(Monopoly
+        Space
+)
