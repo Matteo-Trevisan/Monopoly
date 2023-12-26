@@ -12,6 +12,9 @@ add_executable(Monopoly
 add_library(Space
         src/Space.cpp
         include/space.h
+        src/Normal_Space.cpp
+        include/Normal_Space.h
+        include/Space_Data.h
 )
 
 target_link_libraries(Monopoly Space)
