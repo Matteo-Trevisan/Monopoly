@@ -8,3 +8,10 @@ include_directories(src)
 
 add_executable(Monopoly
         src/main.cpp)
+
+add_library(Space
+        src/Space.cpp
+        include/space.h
+)
+
+target_link_libraries(Monopoly Space)
