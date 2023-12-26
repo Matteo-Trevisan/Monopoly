@@ -14,6 +14,8 @@ enum Building {
 
 class Normal_Space : public Space{
 public:
+	Normal_Space(Space_Data type) : building(Building::empty), data(type) {};
+
 	int get_terrain_sale_price();
 	int get_house_sale_price();
 	int get_hotel_sale_price();

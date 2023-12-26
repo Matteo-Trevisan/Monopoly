@@ -15,6 +15,8 @@ add_library(Space
         src/Normal_Space.cpp
         include/Normal_Space.h
         include/Space_Data.h
+        src/Angular_Space.cpp
+        include/Angular_Space.h
 )
 
 target_link_libraries(Monopoly Space)
