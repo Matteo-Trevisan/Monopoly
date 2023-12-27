@@ -1,8 +1,12 @@
 
 #include <iostream>
-#include "Space/Normal_Space.h"
+#include "Gameboard/Gameboard.h"
 
 int main(int argc, char* argv[]) {
-	Normal_Space space(Space_Data{6,7,8,9,0});
-	 std::cout << "Hello, World!" << std::endl;
+    Config config = {{2,3,4,5,6},
+                     {3,3,4,5,6},
+                     {5,6,7,8,9},
+                     50};
+    Gameboard g(config);
+
 }
