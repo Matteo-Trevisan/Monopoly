@@ -8,5 +8,7 @@ class Angular_Space : public Space {
 
 };
 
+std::ostream &operator<<(std::ostream &os, const Angular_Space &d);
+
 
 #endif //ANGULAR_SPACE_H

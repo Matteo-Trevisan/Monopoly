@@ -24,10 +24,17 @@ add_library(Player
         src/Player/Player.cpp
 )
 
+add_library(Gameboard
+        include/Gameboard/Gameboard.h
+        src/Gameboard/Gameboard.cpp
+)
+
 add_executable(Monopoly
-        src/main.cpp)
+        src/main.cpp
+)
 
 target_link_libraries(Monopoly
         Space
         Player
+        Gameboard
 )
