@@ -1,8 +1,21 @@
 #ifndef MONOPOLY_GAMEBOARD_H
 #define MONOPOLY_GAMEBOARD_H
 
-class Gameboard {
+#include <vector>
+#include "Player/Position.h"
+#include "Player/Player.h"
+#include "Space/Normal_Space.h"
+#include "Space/Start_Space.h"
+#include "Config.h"
 
+
+class Gameboard {
+public:
+    Gameboard(Config config);
+
+private:
+    std::vector<std::vector<Space>>
+    getPosition(Player p, int value);
 };
 
 #endif //MONOPOLY_GAMEBOARD_H

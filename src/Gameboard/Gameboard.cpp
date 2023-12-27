@@ -1,3 +1,17 @@
-//
-// Created by andre on 27/12/2023.
-//
+
+#include "Gameboard/Gameboard.h"
+
+
+Gameboard::Gameboard(Config config) {
+    std::vector<Normal_Space> space_deck;
+    space_deck.reserve(24);
+    for(int i = 0; i < 8; i++) {
+        space_deck.emplace_back(config.Cheap_Space);
+    }
+    for(int i = 0; i < 10; i++) {
+        space_deck.emplace_back(config.Standard_Space);
+    }
+    for(int i = 0; i < 6; i++) {
+        space_deck.emplace_back(config.Luxury_Space);
+    }
+};
