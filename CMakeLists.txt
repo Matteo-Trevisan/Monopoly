@@ -29,6 +29,11 @@ add_library(Game_Manager
         include/Game_manager/Game_Manager.h
 )
 
+add_library(Gameboard
+        include/Gameboard/Gameboard.h
+        src/Gameboard/Gameboard.cpp
+)
+
 add_executable(Monopoly
         src/main.cpp)
 
@@ -36,4 +41,5 @@ target_link_libraries(Monopoly
         Space
         Player
         Game_Manager
+        Gameboard
 )

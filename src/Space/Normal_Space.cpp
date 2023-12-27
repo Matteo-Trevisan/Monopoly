@@ -67,3 +67,11 @@ int Normal_Space::get_next_upgrade_price() {
 bool Normal_Space::upgradable() {
 	return owner != nullptr && building != Building::hotel;
 }
+
+char Normal_Space::get_type_char() const {
+    return data.type;
+}
+
+std::ostream &operator<<(std::ostream &os, const Normal_Space &d) {
+    return os << d.get_type_char();
+}
