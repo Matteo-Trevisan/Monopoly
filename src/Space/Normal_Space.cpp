@@ -65,5 +65,5 @@ int Normal_Space::get_next_upgrade_price() {
 }
 
 bool Normal_Space::upgradable() {
-	return building != Building::hotel;
+	return owner != nullptr && building != Building::hotel;
 }

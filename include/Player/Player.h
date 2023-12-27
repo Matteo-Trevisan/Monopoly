@@ -7,16 +7,18 @@
 
 class Player {
 public:
-	explicit Player(int initial_balance) : balance(initial_balance), pos(Position{7,7}) {};
+	explicit Player(int initial_balance, bool human) : balance(initial_balance), pos(Position{7,7}), human(human) {};
 	bool isPlaying();
-	bool has_enought_balance(int value);
+	bool has_enough_money(int value);
 	bool pay(int value);
-	bool pay(Player& ricevente, int value);
+	bool pay(Player& receiver, int value);
 	void set_position(Position&& p);
+	bool is_human() const;
 
 private:
 	int balance;
 	Position pos;
+	bool human;
 };
 
 

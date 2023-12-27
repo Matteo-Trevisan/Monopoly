@@ -6,9 +6,6 @@ set(CMAKE_CXX_STANDARD 11)
 include_directories(include)
 include_directories(src)
 
-add_executable(Monopoly
-        src/main.cpp)
-
 add_library(Space
         include/Space/Space.h
         include/Space/Normal_Space.h
@@ -26,6 +23,9 @@ add_library(Player
         include/Player/Position.h
         src/Player/Player.cpp
 )
+
+add_executable(Monopoly
+        src/main.cpp)
 
 target_link_libraries(Monopoly
         Space

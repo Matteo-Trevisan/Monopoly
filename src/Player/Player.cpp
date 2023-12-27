@@ -9,22 +9,22 @@ bool Player::isPlaying() {
 }
 
 
-bool Player::has_enought_balance(int value) {
+bool Player::has_enough_money(int value) {
 	return balance >= value;
 }
 
 bool Player::pay(int value) {
-	if (has_enought_balance(value)) {
+	if (has_enough_money(value)) {
 		balance -= value;
 		return true;
 	}
 	return false;
 }
 
-bool Player::pay(Player &ricevente, int value) {
-	if (has_enought_balance(value)) {
+bool Player::pay(Player &receiver, int value) {
+	if (has_enough_money(value)) {
 		this->balance -= value;
-		ricevente.balance += value;
+		receiver.balance += value;
 		return true;
 	}
 	return false;
@@ -32,4 +32,8 @@ bool Player::pay(Player &ricevente, int value) {
 
 void Player::set_position(Position &&p) {
 	pos = p;
+}
+
+bool Player::is_human() const {
+	return human;
 }
