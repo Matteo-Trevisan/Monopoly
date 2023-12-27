@@ -33,4 +33,5 @@ private:
 };
 
 
+
 #endif //NORMAL_SPACE_H

@@ -1,5 +1,7 @@
 
 #include "Gameboard/Gameboard.h"
+#include <random>
+#include <algorithm>
 
 
 Gameboard::Gameboard(Config config) {

@@ -9,13 +9,11 @@
 #include "Config.h"
 
 
+
 class Gameboard {
 public:
-    Gameboard(Config config);
-
-private:
-    std::vector<std::vector<Space>>
-    getPosition(Player p, int value);
+    explicit Gameboard(Config config);
+    Space getPosition(Player p, int value);
 };
 
 #endif //MONOPOLY_GAMEBOARD_H
