@@ -29,3 +29,7 @@ bool Player::pay(Player &ricevente, int value) {
 	}
 	return false;
 }
+
+void Player::set_position(Position &&p) {
+	pos = p;
+}

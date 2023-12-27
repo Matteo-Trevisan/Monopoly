@@ -12,6 +12,7 @@ public:
 	bool has_enought_balance(int value);
 	bool pay(int value);
 	bool pay(Player& ricevente, int value);
+	void set_position(Position&& p);
 
 private:
 	int balance;
