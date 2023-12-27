@@ -24,13 +24,16 @@ add_library(Player
         src/Player/Player.cpp
 )
 
-add_executable(Monopoly
-        src/main.cpp
+add_library(Game_Manager
         src/Game_manager/Game_Manager.cpp
-        include/Game_manager/Game_Manager.h)
+        include/Game_manager/Game_Manager.h
+)
+
+add_executable(Monopoly
+        src/main.cpp)
 
 target_link_libraries(Monopoly
         Space
         Player
+        Game_Manager
 )
-add_library(Game_Manager src/Game_manager/Game_Manager.cpp include/Game_manager/Game_Manager.h)

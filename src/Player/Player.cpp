@@ -41,3 +41,15 @@ bool Player::is_human() const {
 void Player::add_property() {
 	properties.push_back(pos);
 }
+
+void Player::set_initial_dice_roll(int value) {
+	dice_roll = value;
+}
+
+int Player::get_initial_dice_roll() const {
+	return dice_roll;
+}
+
+bool compareByDiceRoll(const Player &a, const Player &b) {
+	return a.get_initial_dice_roll() < b.get_initial_dice_roll();
+}
