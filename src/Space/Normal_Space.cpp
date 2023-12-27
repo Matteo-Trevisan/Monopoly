@@ -1,23 +1,23 @@
 
 #include "Space/Normal_Space.h"
 
-int Normal_Space::get_terrain_sale_price() {
+int Normal_Space::get_terrain_sale_price() const {
 	return data.terrain_sale;
 }
 
-int Normal_Space::get_house_sale_price() {
+int Normal_Space::get_house_sale_price() const {
 	return data.house_sale;
 }
 
-int Normal_Space::get_hotel_sale_price() {
+int Normal_Space::get_hotel_sale_price() const {
 	return data.hotel_sale;
 }
 
-int Normal_Space::get_house_overnight_stay_price() {
+int Normal_Space::get_house_overnight_stay_price() const {
 	return data.house_overnight_stay;
 }
 
-int Normal_Space::get_hotel_overnight_stay_price() {
+int Normal_Space::get_hotel_overnight_stay_price() const {
 	return data.hotel_overnight_stay;
 }
 
@@ -35,7 +35,8 @@ void Normal_Space::upgrade() {
 }
 
 void Normal_Space::reset() {
-	//TODO Implement reset function
+	building = Building::empty;
+	owner = nullptr;
 }
 
 int Normal_Space::get_overnight_stay_price() {
@@ -50,14 +51,17 @@ int Normal_Space::get_overnight_stay_price() {
 }
 
 int Normal_Space::get_next_upgrade_price() {
-	switch (building) {
-		case empty:
-			return get_terrain_sale_price();
-		case house:
-			return get_house_sale_price();
-		default:
-			return 0;
+	if (owner != nullptr) {
+		switch (building) {
+			case empty:
+				return get_house_sale_price();
+			case house:
+				return get_hotel_sale_price();
+			case hotel:
+				break;
+		}
 	}
+	return 0;
 }
 
 bool Normal_Space::upgradable() {

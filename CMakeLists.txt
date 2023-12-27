@@ -24,4 +24,5 @@ add_library(Space
 target_link_libraries(Monopoly
         Space
 )
-add_library(Player src/Player/Player.cpp include/Player/Player.h)
+add_library(Player src/Player/Player.cpp include/Player/Player.h
+        include/Player/Position.h)

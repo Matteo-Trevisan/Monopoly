@@ -4,6 +4,7 @@
 
 #include "Space.h"
 #include "Space_Data.h"
+#include "Player/Player.h"
 
 enum Building {
 	empty, house, hotel
@@ -11,13 +12,13 @@ enum Building {
 
 class Normal_Space : public Space{
 public:
-	Normal_Space(Space_Data type) : building(Building::empty), data(type) {};
+	explicit Normal_Space(Space_Data type) : building(Building::empty), data(type), owner(nullptr) {};
 
-	int get_terrain_sale_price();
-	int get_house_sale_price();
-	int get_hotel_sale_price();
-	int get_house_overnight_stay_price();
-	int get_hotel_overnight_stay_price();
+	int get_terrain_sale_price() const;
+	int get_house_sale_price() const;
+	int get_hotel_sale_price() const;
+	int get_house_overnight_stay_price() const;
+	int get_hotel_overnight_stay_price() const;
 	int get_overnight_stay_price();
 	int get_next_upgrade_price();
 	bool upgradable();
@@ -27,7 +28,7 @@ public:
 private:
 	Building building;
 	Space_Data data;
-	//Player owner;		TODO When Player Created remove comment
+	Player* owner;
 
 };
 
