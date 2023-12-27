@@ -16,4 +16,8 @@ Gameboard::Gameboard(Config config) {
     for(int i = 0; i < 6; i++) {
         space_deck.emplace_back(config.Luxury_Space);
     }
+
+    std::random_device rd{};
+    auto rng = std::default_random_engine { rd() };
+    std::shuffle(std::begin(space_deck), std::end(space_deck),rng);
 };
