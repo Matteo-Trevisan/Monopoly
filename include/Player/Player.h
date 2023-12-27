@@ -14,10 +14,12 @@ public:
 	bool pay(Player& receiver, int value);
 	void set_position(Position&& p);
 	bool is_human() const;
+	void add_property();
 
 private:
 	int balance;
 	Position pos;
+	std::vector<Position> properties;
 	bool human;
 };
 

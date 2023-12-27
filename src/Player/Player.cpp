@@ -37,3 +37,7 @@ void Player::set_position(Position &&p) {
 bool Player::is_human() const {
 	return human;
 }
+
+void Player::add_property() {
+	properties.push_back(pos);
+}
