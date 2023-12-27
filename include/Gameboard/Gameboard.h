@@ -5,6 +5,10 @@
 #ifndef MONOPOLY_GAMEBOARD_H
 #define MONOPOLY_GAMEBOARD_H
 
+#include <iostream>
 
+class Gameboard {
+
+};
 
 #endif //MONOPOLY_GAMEBOARD_H
