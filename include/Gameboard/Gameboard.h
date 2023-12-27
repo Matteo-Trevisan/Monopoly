@@ -14,6 +14,9 @@ class Gameboard {
 public:
     explicit Gameboard(Config config);
     Space getPosition(Player p, int value);
+
+    std::vector<Space> space_deck;  //TODO incapsulation
+private:
 };
 
 #endif //MONOPOLY_GAMEBOARD_H

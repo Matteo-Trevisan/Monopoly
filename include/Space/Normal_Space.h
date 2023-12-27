@@ -5,6 +5,7 @@
 #include "Space.h"
 #include "Space_Data.h"
 #include "Player/Player.h"
+#include "iostream"
 
 enum Building {
 	empty, house, hotel
@@ -24,6 +25,7 @@ public:
 	bool upgradable();
 	void upgrade();
 	void reset();
+    char get_type_char() const;
 
 private:
 	Building building;
@@ -31,6 +33,8 @@ private:
 	Player* owner;
 
 };
+
+std::ostream &operator<<(std::ostream &os, const Normal_Space &d);
 
 
 

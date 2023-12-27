@@ -9,10 +9,11 @@ public:
 	explicit Start_Space(int startPassMoney) : start_pass_money(startPassMoney){};
 	int get_start_pass_money() const;
 	void set_start_pass_money(int startPassMoney);
+    std::ostream &operator<<(std::ostream &os);
 private:
 	int start_pass_money;
-public:
 };
+
 
 
 #endif //START_SPACE_H

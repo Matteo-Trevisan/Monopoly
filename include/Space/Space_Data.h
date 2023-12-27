@@ -8,6 +8,7 @@ struct Space_Data {
 	int hotel_sale;
 	int house_overnight_stay;
 	int hotel_overnight_stay;
+    char type;
 };
 
 
