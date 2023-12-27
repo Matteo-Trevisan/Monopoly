@@ -3,19 +3,18 @@
 #define PLAYER_H
 
 #include <vector>
-#include "Space/Space.h"
 #include "Position.h"
 
 class Player {
 public:
+	explicit Player(int initial_balance) : balance(initial_balance), pos(Position{7,7}) {};
 	bool isPlaying();
+	bool has_enought_balance(int value);
 	bool pay(int value);
-	bool pay(Player ricevente, int value);
-	void clear();
+	bool pay(Player& ricevente, int value);
 
 private:
 	int balance;
-	std::vector<Space> properties;
 	Position pos;
 };
 

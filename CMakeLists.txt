@@ -21,8 +21,13 @@ add_library(Space
         src/Space/Start_Space.cpp
 )
 
+add_library(Player
+        include/Player/Player.h
+        include/Player/Position.h
+        src/Player/Player.cpp
+)
+
 target_link_libraries(Monopoly
         Space
+        Player
 )
-add_library(Player src/Player/Player.cpp include/Player/Player.h
-        include/Player/Position.h)
