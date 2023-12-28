@@ -9,7 +9,7 @@ bool Player::isPlaying() {
 }
 
 
-bool Player::has_enough_money(int value) {
+bool Player::has_enough_money(int value) const {
 	return balance >= value;
 }
 
@@ -57,6 +57,10 @@ int Player::get_position() const {
 
 std::string Player::get_name() const {
 	return name;
+}
+
+bool Player::offer(std::string offer) {
+	return true;
 }
 
 bool compareByDiceRoll(const Player &a, const Player &b) {

@@ -10,7 +10,7 @@ public:
 	explicit Player(int initial_balance, bool human, std::string&& name) :
 	balance(initial_balance), pos(0), human(human), name(name), dice_roll(0) {};
 	bool isPlaying();
-	bool has_enough_money(int value);
+	bool has_enough_money(int value) const;
 	bool pay(int value);
 	bool pay(Player& receiver, int value);
 	void set_position(int p);
@@ -20,6 +20,7 @@ public:
 	int get_initial_dice_roll() const;
 	int get_position() const;
 	std::string get_name() const;
+	virtual bool offer(std::string offer) const;
 
 private:
 	int dice_roll;
