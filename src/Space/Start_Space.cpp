@@ -9,8 +9,7 @@ int Start_Space::get_start_pass_money() const {
 void Start_Space::set_start_pass_money(int startPassMoney) {
 	start_pass_money = startPassMoney;
 }
-/*
-std::ostream& Start_Space::operator<<(std::ostream &os) {
-    return os << "P";
+
+char Start_Space::get_type_char() const {
+	return 'P';
 }
- */ TODO finire qui

@@ -4,7 +4,7 @@
 
 #include <vector>
 #include "Player/Player.h"
-// #include "Gameboard/Gameboard.h" TODO remove comment
+#include "Gameboard/Gameboard.h"
 
 enum Player_Type {
 	Computer, Human
@@ -12,11 +12,11 @@ enum Player_Type {
 
 class Game_Manager {
 public:
-	Game_Manager(Player_Type p, int initial_balance);
+	explicit Game_Manager(Player_Type p, Config config);
 	void start();
 
 private:
-	// Gameboard gameboard; TODO
+	Gameboard gameboard;
 	std::vector<Player> players;
 
 

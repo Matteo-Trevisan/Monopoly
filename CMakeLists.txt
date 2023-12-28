@@ -25,8 +25,8 @@ add_library(Player
 )
 
 add_library(Game_Manager
-        src/Game_manager/Game_Manager.cpp
         include/Game_manager/Game_Manager.h
+        src/Game_manager/Game_Manager.cpp
 )
 
 add_library(Gameboard

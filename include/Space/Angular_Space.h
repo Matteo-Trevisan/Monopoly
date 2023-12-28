@@ -3,12 +3,11 @@
 #define ANGULAR_SPACE_H
 
 #include "Space.h"
+#include "iostream"
 
 class Angular_Space : public Space {
-
+public:
+	char get_type_char() const;
 };
-
-std::ostream &operator<<(std::ostream &os, const Angular_Space &d);
-
 
 #endif //ANGULAR_SPACE_H

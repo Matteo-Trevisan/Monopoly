@@ -4,6 +4,7 @@
 
 #include <vector>
 #include "Position.h"
+#include <string>
 
 class Player {
 public:

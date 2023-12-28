@@ -1,22 +1,19 @@
-#ifndef MONOPOLY_GAMEBOARD_H
-#define MONOPOLY_GAMEBOARD_H
+#ifndef GAMEBOARD_H
+#define GAMEBOARD_H
 
 #include <vector>
-#include "Player/Position.h"
 #include "Player/Player.h"
-#include "Space/Normal_Space.h"
-#include "Space/Start_Space.h"
+#include "Space/Space.h"
 #include "Config.h"
-
-
+#include "memory"
 
 class Gameboard {
 public:
-    explicit Gameboard(Config config);
+    explicit Gameboard(Config config = Config());
     Space getPosition(Player p, int value);
 
-    std::vector<Space> space_deck;  //TODO incapsulation
+	std::vector<std::unique_ptr<Space>> space_deck;
 private:
 };
 
-#endif //MONOPOLY_GAMEBOARD_H
+#endif //GAMEBOARD_H

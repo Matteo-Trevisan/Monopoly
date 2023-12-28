@@ -1,15 +1,16 @@
 
 #include "Game_manager/Game_Manager.h"
 #include <iostream>
+#include <algorithm>
 #include <random>
 
-Game_Manager::Game_Manager(Player_Type p, int initial_balance) {
+Game_Manager::Game_Manager(Player_Type p, Config config) {
 	players.reserve(4);
-	players.emplace_back(initial_balance, p, "Giocatore 1");
+	players.emplace_back(config.initial_balance, p, "Giocatore 1");
 	for (int i = 0; i < 3; ++i) {
-		players.emplace_back(initial_balance, 0, "Giocatore " + std::to_string(i));
+		players.emplace_back(config.initial_balance, 0, "Giocatore " + std::to_string(i));
 	}
-	// gameboard(); TODO remove comments
+	gameboard = Gameboard(config);
 }
 
 void Game_Manager::start() {
