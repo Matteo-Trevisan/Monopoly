@@ -30,17 +30,18 @@ bool Player::pay(Player &receiver, int value) {
 	return false;
 }
 
-void Player::set_position(Position &&p) {
+void Player::set_position(int p) {
 	pos = p;
 }
 
 bool Player::is_human() const {
 	return human;
 }
-
+/*	TODO capire come implementare le prorpietà come coppie A1, B8
 void Player::add_property() {
 	properties.push_back(pos);
 }
+ */
 
 void Player::set_initial_dice_roll(int value) {
 	dice_roll = value;
@@ -48,6 +49,14 @@ void Player::set_initial_dice_roll(int value) {
 
 int Player::get_initial_dice_roll() const {
 	return dice_roll;
+}
+
+int Player::get_position() const {
+	return pos;
+}
+
+std::string Player::get_name() const {
+	return name;
 }
 
 bool compareByDiceRoll(const Player &a, const Player &b) {

@@ -71,3 +71,14 @@ bool Normal_Space::upgradable() {
 char Normal_Space::get_type_char() const {
     return data.type;
 }
+
+std::string Normal_Space::get_current_building_char() const {
+	switch (building) {
+		case house:
+			return "*";
+		case hotel:
+			return "^";
+		default:
+			return "";
+	}
+}

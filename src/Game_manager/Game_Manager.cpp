@@ -10,7 +10,7 @@ Game_Manager::Game_Manager(Player_Type p, Config config) {
 	for (int i = 0; i < 3; ++i) {
 		players.emplace_back(config.initial_balance, 0, "Giocatore " + std::to_string(i));
 	}
-	gameboard = Gameboard(config);
+	gameboard = Gameboard(config, &players);
 }
 
 void Game_Manager::start() {
@@ -23,5 +23,9 @@ void Game_Manager::start() {
 	}
 
 	std::sort(players.begin(), players.end(), compareByDiceRoll);
+}
+
+const Gameboard& Game_Manager::get_gameboard() const {
+	return gameboard;
 }
 

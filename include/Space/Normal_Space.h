@@ -22,6 +22,7 @@ public:
 	int get_hotel_overnight_stay_price() const override;
 	int get_overnight_stay_price() override;
 	int get_next_upgrade_price() override;
+	std::string get_current_building_char() const override;
 	bool upgradable() override;
 	void upgrade() override;
 	void reset() override;

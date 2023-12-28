@@ -45,6 +45,10 @@ char Space::get_type_char() const {
 	return ' ';
 }
 
+std::string Space::get_current_building_char() const {
+	return "";
+}
+
 
 std::ostream &operator<<(std::ostream &os, const Space &d) {
 	return os << d.get_type_char();
