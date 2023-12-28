@@ -71,7 +71,3 @@ bool Normal_Space::upgradable() {
 char Normal_Space::get_type_char() const {
     return data.type;
 }
-
-std::ostream &operator<<(std::ostream &os, const Normal_Space &d) {
-    return os << d.get_type_char();
-}

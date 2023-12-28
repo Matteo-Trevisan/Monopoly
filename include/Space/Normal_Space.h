@@ -15,17 +15,17 @@ class Normal_Space : public Space{
 public:
 	explicit Normal_Space(Space_Data type) : building(Building::empty), data(type), owner(nullptr) {};
 
-	int get_terrain_sale_price() const;
-	int get_house_sale_price() const;
-	int get_hotel_sale_price() const;
-	int get_house_overnight_stay_price() const;
-	int get_hotel_overnight_stay_price() const;
-	int get_overnight_stay_price();
-	int get_next_upgrade_price();
-	bool upgradable();
-	void upgrade();
-	void reset();
-    char get_type_char() const;
+	int get_terrain_sale_price() const override;
+	int get_house_sale_price() const override;
+	int get_hotel_sale_price() const override;
+	int get_house_overnight_stay_price() const override;
+	int get_hotel_overnight_stay_price() const override;
+	int get_overnight_stay_price() override;
+	int get_next_upgrade_price() override;
+	bool upgradable() override;
+	void upgrade() override;
+	void reset() override;
+    char get_type_char() const override;
 
 private:
 	Building building;
@@ -33,9 +33,6 @@ private:
 	Player* owner;
 
 };
-
-std::ostream &operator<<(std::ostream &os, const Normal_Space &d);
-
 
 
 #endif //NORMAL_SPACE_H
