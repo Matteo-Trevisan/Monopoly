@@ -12,8 +12,14 @@ public:
     explicit Gameboard(Config config = Config());
     Space getPosition(Player p, int value);
 
-	std::vector<std::unique_ptr<Space>> space_deck;
+	std::unique_ptr<Space>& get_space_at(int i);
+
 private:
+	std::vector<std::unique_ptr<Space>> space_deck;
+
 };
+
+std::ostream &operator<<(std::ostream &os, Gameboard &g);
+std::string print_space_info(std::unique_ptr<Space>& uptr);
 
 #endif //GAMEBOARD_H

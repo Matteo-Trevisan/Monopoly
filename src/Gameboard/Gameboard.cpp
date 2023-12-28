@@ -4,6 +4,7 @@
 #include "Space/Start_Space.h"
 #include <random>
 #include <algorithm>
+#include <stdexcept>
 
 
 Gameboard::Gameboard(Config config) {
@@ -29,4 +30,42 @@ Gameboard::Gameboard(Config config) {
     iter_swap(space_deck.begin() + 7, space_deck.begin() + 25);
     iter_swap(space_deck.begin() + 14, space_deck.begin() + 26);
     iter_swap(space_deck.begin() + 21, space_deck.begin() + 27);
+}
+
+std::unique_ptr<Space>& Gameboard::get_space_at(int i) {
+	return space_deck.at(i);
 };
+
+std::string print_space_info(std::unique_ptr<Space>& uptr) {
+	return "";
+}
+
+
+std::ostream &operator<<(std::ostream &os, Gameboard &g) {
+	std::string stampa;
+	for (int i = 14; i < 22; ++i) {
+		std::unique_ptr<Space>& uptr = g.get_space_at(i);
+		os << "|\t" << uptr -> get_type_char() << print_space_info(uptr) << "\t|\t";
+	}
+	os << std::endl;
+	int t = 6;
+	int k = 22;
+	for (int i = 0; i < 6; ++i) {
+		std::unique_ptr<Space>& uptr1 = g.get_space_at(k-9-i);
+		os << "|\t"  << uptr1 -> get_type_char() << print_space_info(uptr1) << "\t|\t";
+		for (int s = 0; s < 18; ++s) {
+			os << "\t";
+		}
+		std::unique_ptr<Space>& uptr2 = g.get_space_at(i+k);
+		os << "|\t" << uptr2 -> get_type_char() << print_space_info(uptr2) << "\t|";
+		if (i < 5) {
+			os << std::endl;
+		}
+	}
+	os << std::endl;
+	for (int i = 7; i >= 0; --i) {
+		std::unique_ptr<Space>& uptr = g.get_space_at(i);
+		os << "|\t" << uptr -> get_type_char() << print_space_info(uptr) << "\t|\t";
+	}
+	return os << stampa;
+}

@@ -13,8 +13,8 @@ int main(int argc, char* argv[]) {
 //	gm.start();
 
 	Gameboard b(config);
-
-	for (int i = 0; i < 28; ++i) {
-		std::cout << b.space_deck.at(i).get() -> get_type_char() << ", ";
-	}
+	std::cout << b;
+//	for (int i = 0; i < 28; ++i) {
+//		std::cout << b.get_space_at(i) -> get_type_char() << ", ";
+//	}
 }
