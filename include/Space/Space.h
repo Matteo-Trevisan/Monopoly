@@ -7,6 +7,7 @@
 
 class Space {
 public:
+	Space(std::string name) : name(name) {};
 	virtual int get_terrain_sale_price() const;
 	virtual int get_house_sale_price() const;
 	virtual int get_hotel_sale_price() const;
@@ -19,6 +20,10 @@ public:
 	virtual void upgrade();
 	virtual void reset();
 	virtual char get_type_char() const;
+	std::string get_name() const;
+	void set_name(const std::string& value);
+private:
+	std::string name;
 };
 
 std::ostream &operator<<(std::ostream &os, const Space &d);

@@ -7,7 +7,8 @@
 
 class Angular_Space : public Space {
 public:
-	char get_type_char() const;
+	Angular_Space() : Angular_Space::Space(std::string()) {};
+	char get_type_char() const override;
 };
 
 #endif //ANGULAR_SPACE_H

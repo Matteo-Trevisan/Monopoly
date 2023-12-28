@@ -49,6 +49,13 @@ std::string Space::get_current_building_char() const {
 	return "";
 }
 
+std::string Space::get_name() const {
+	return name;
+}
+
+void Space::set_name(const std::string& value) {
+	name = value;
+}
 
 std::ostream &operator<<(std::ostream &os, const Space &d) {
 	return os << d.get_type_char();
