@@ -1,12 +1,9 @@
-//
-// Created by Matteo Trevisan on 28/12/23.
-//
 
 #include "Player/Computer_Player.h"
 #include <iostream>
 #include <random>
 
-bool Computer_Player::offer(std::string offer) const {
+bool Computer_Player::offer(const std::string& offer) const {
 	std::cout << offer << " [S/N]: ";
 
 	std::random_device rd;

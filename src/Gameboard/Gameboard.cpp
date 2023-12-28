@@ -8,7 +8,7 @@
 #include <iomanip>
 
 
-Gameboard::Gameboard(Config config, std::vector<Player>* players) : players(players) {
+Gameboard::Gameboard(Config config, std::vector<std::unique_ptr<Player>>* players) : players(players) {
     space_deck.reserve(24);
 	space_deck.emplace_back(new Start_Space(config.initial_balance));
     for(int i = 0; i < 8; i++) {
@@ -37,7 +37,7 @@ const std::unique_ptr<Space>& Gameboard::get_space_at(int i) const {
 	return space_deck.at(i);
 }
 
-std::vector<Player>* Gameboard::get_players() const {
+std::vector<std::unique_ptr<Player>>* Gameboard::get_players() const {
 	return players;
 };
 
@@ -46,10 +46,10 @@ std::string get_space_info(int i, const Gameboard &g) {
 	const std::unique_ptr<Space>& uptr = g.get_space_at(i);
 	ret += uptr -> get_type_char() + uptr -> get_current_building_char();
 	if (g.get_players() != nullptr) {
-		std::vector<Player>& players_vec = *g.get_players();
+		std::vector<std::unique_ptr<Player>>& players_vec = *g.get_players();
 		for (int j = 0; j < players_vec.size(); ++j) {
-			if (players_vec.at(j).get_position() == i) {
-				ret += std::to_string(j+1);
+			if (players_vec.at(j)->get_position() == i) {
+				ret += players_vec.at(j)->get_name();
 			}
 		}
 	}

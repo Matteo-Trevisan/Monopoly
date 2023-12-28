@@ -6,7 +6,9 @@
 
 class Human_Player : public Player{
 public:
-	bool offer(std::string offer) const override;
+	explicit Human_Player(int initial_balance, const std::string& name) :
+	Human_Player::Player(initial_balance, name){};
+	bool offer(const std::string& offer) const override;
 
 private:
 };

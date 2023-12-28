@@ -9,14 +9,13 @@
 
 class Gameboard {
 public:
-    explicit Gameboard(Config config = Config(), std::vector<Player>* players = nullptr);
-    Space getPosition(Player p, int value);
-	std::vector<Player>* get_players() const;
+    explicit Gameboard(Config config = Config(), std::vector<std::unique_ptr<Player>>* players = nullptr);
+	std::vector<std::unique_ptr<Player>>* get_players() const;
 	const std::unique_ptr<Space>& get_space_at(int i) const;
 
 private:
 	std::vector<std::unique_ptr<Space>> space_deck;
-	std::vector<Player>* players;
+	std::vector<std::unique_ptr<Player>>* players;
 };
 
 std::ostream &operator<<(std::ostream &os, const Gameboard &g);

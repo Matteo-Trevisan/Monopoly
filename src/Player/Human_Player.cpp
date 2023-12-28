@@ -5,7 +5,7 @@
 #include "Player/Human_Player.h"
 #include <iostream>
 
-bool Human_Player::offer(std::string offer) const {
+bool Human_Player::offer(const std::string& offer) const {
 	std::cout << offer << " [S/N]: ";
 	while (true) {
 		std::string response;
