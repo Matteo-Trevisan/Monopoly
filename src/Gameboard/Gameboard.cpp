@@ -106,7 +106,7 @@ std::ostream &operator<<(std::ostream &os, const Gameboard &g) {
 	// LEGENDA ORIZZONTALE
 	os << "|" << RED << std::setw(2) << " \u2665 " << std::setw(2) << GREEN << "|";
 	for (int i = 0; i < 8; ++i) {
-		os << std::setw(5) << char(65+i) << std::setw(5) << "|";
+		os << std::setw(5) << i+1 << std::setw(5) << "|";
 	}
 	os << std::endl;
 
@@ -114,7 +114,7 @@ std::ostream &operator<<(std::ostream &os, const Gameboard &g) {
 	os << Print_Line() << std::endl << RESET;
 
 	// PRIMA RIGA TABELLA
-	os << GREEN << "|" << std::setw(2) << "1" << std::setw(2) << "|" << RESET;
+	os << GREEN << "|" << std::setw(2) << "A" << std::setw(2) << "|" << RESET;
 	for (int i = 14; i < 22; ++i) {
 		os << std::setw(5) << get_space_info(i, g) << std::setw(5) << "|";
 	}
@@ -123,7 +123,7 @@ std::ostream &operator<<(std::ostream &os, const Gameboard &g) {
 	// PARTE CENTRALE TABELLA
 	int k = 22;
 	for (int i = 0; i < 6; ++i) {
-		os << GREEN << "|" << std::setw(2) << i+2 << std::setw(2) << "|" << RESET << std::setw(5) << get_space_info(k-9-i, g) << std::setw(5) << "|";
+		os << GREEN << "|" << std::setw(2) << char(66+i) << std::setw(2) << "|" << RESET << std::setw(5) << get_space_info(k-9-i, g) << std::setw(5) << "|";
 		os << std::setw(60);
 		os << "|" << std::setw(5) << get_space_info(i+k, g) << std::setw(5) << "|";
 		if (i < 5) {
@@ -133,7 +133,7 @@ std::ostream &operator<<(std::ostream &os, const Gameboard &g) {
 	os << std::endl << Print_Line(true, GREEN) << std::endl;
 
 	// RIGA FINALE TABELLA
-	os << GREEN << "|" << std::setw(2) << "8" << std::setw(2) << "|" << RESET;
+	os << GREEN << "|" << std::setw(2) << "H" << std::setw(2) << "|" << RESET;
 	for (int i = 7; i >= 0; --i) {
 		os << std::setw(5) << get_space_info(i,g ) << std::setw(5) << "|";
 	}

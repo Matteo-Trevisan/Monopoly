@@ -15,5 +15,6 @@ int main(int argc, char* argv[]) {
 	Game_Manager gm(Player_Type::Computer ,config);
 	gm.start();
 	std::cout << gm.get_gameboard() << std::endl;
+	gm.run_game();
 
 }

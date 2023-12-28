@@ -27,6 +27,8 @@ public:
 	void upgrade() override;
 	void reset() override;
     char get_type_char() const override;
+	Player* get_owner() override;
+	void set_owner(Player* p) override;
 
 private:
 	Building building;

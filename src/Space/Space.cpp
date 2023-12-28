@@ -57,6 +57,14 @@ void Space::set_name(const std::string& value) {
 	name = value;
 }
 
+Player *Space::get_owner() {
+	return nullptr;
+}
+
+void Space::set_owner(Player* p) {
+}
+
+
 std::ostream &operator<<(std::ostream &os, const Space &d) {
 	return os << d.get_type_char();
 }
