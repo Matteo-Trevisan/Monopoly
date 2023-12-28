@@ -9,17 +9,26 @@
 
 class Gameboard {
 public:
-    explicit Gameboard(Config config = Config(), std::vector<Player>* players = nullptr);
-    Space getPosition(Player p, int value);
-	std::vector<Player>* get_players() const;
+    explicit Gameboard(Config config = Config(), std::vector<std::unique_ptr<Player>>* players = nullptr);
+	std::vector<std::unique_ptr<Player>>* get_players() const;
 	const std::unique_ptr<Space>& get_space_at(int i) const;
+	std::unique_ptr<Space>& get_space_at(int i);
 
 private:
 	std::vector<std::unique_ptr<Space>> space_deck;
-	std::vector<Player>* players;
+	std::vector<std::unique_ptr<Player>>* players;
+};
+
+class Print_Line {
+public:
+	Print_Line(bool mp = true, std::string col = std::string()) : middle_part(mp), color(col) {};
+	bool middle_part;
+	std::string color;
 };
 
 std::ostream &operator<<(std::ostream &os, const Gameboard &g);
+std::ostream &operator<<(std::ostream &os, const Print_Line &obj);
+
 std::string get_space_info(int i, const Gameboard &g);
 
 #endif //GAMEBOARD_H

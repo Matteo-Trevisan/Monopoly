@@ -1,6 +1,3 @@
-//
-// Created by Matteo Trevisan on 26/12/23.
-//
 
 #include "Player/Player.h"
 
@@ -9,7 +6,7 @@ bool Player::isPlaying() {
 }
 
 
-bool Player::has_enough_money(int value) {
+bool Player::has_enough_money(int value) const {
 	return balance >= value;
 }
 
@@ -34,9 +31,6 @@ void Player::set_position(int p) {
 	pos = p;
 }
 
-bool Player::is_human() const {
-	return human;
-}
 /*	TODO capire come implementare le prorpietà come coppie A1, B8
 void Player::add_property() {
 	properties.push_back(pos);
@@ -59,6 +53,6 @@ std::string Player::get_name() const {
 	return name;
 }
 
-bool compareByDiceRoll(const Player &a, const Player &b) {
-	return a.get_initial_dice_roll() < b.get_initial_dice_roll();
+bool Player::offer(const std::string& offer) const {
+	return true;
 }

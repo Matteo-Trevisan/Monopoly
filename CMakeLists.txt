@@ -21,6 +21,10 @@ add_library(Space
 add_library(Player
         include/Player/Player.h
         src/Player/Player.cpp
+        src/Player/Human_Player.cpp
+        include/Player/Human_Player.h
+        src/Player/Computer_Player.cpp
+        include/Player/Computer_Player.h
 )
 
 add_library(Game_Manager

@@ -82,3 +82,11 @@ std::string Normal_Space::get_current_building_char() const {
 			return "";
 	}
 }
+
+Player *Normal_Space::get_owner() {
+	return owner;
+}
+
+void Normal_Space::set_owner(Player* p) {
+	owner = p;
+}
