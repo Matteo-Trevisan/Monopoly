@@ -3,6 +3,7 @@
 #define SPACE_H
 
 #include <iostream>
+#include <string>
 
 class Space {
 public:
@@ -11,6 +12,7 @@ public:
 	virtual int get_hotel_sale_price() const;
 	virtual int get_house_overnight_stay_price() const;
 	virtual int get_hotel_overnight_stay_price() const;
+	virtual std::string get_current_building_char() const;
 	virtual int get_overnight_stay_price();
 	virtual int get_next_upgrade_price();
 	virtual bool upgradable();

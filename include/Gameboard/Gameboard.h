@@ -20,6 +20,6 @@ private:
 };
 
 std::ostream &operator<<(std::ostream &os, Gameboard &g);
-std::string print_space_info(std::unique_ptr<Space>& uptr);
+std::string get_space_info(std::unique_ptr<Space>& uptr);
 
 #endif //GAMEBOARD_H
