@@ -14,6 +14,7 @@ class Game_Manager {
 public:
 	explicit Game_Manager(Player_Type p, Config config);
 	void start();
+	const Gameboard& get_gameboard() const;
 
 private:
 	Gameboard gameboard;

@@ -3,6 +3,8 @@
 #include "Game_manager/Game_Manager.h"
 #include "Config.h"
 
+#include <iomanip>
+
 int main(int argc, char* argv[]) {
 
 	Config config = {{2,3,4,5,6, 'E'},
@@ -12,8 +14,8 @@ int main(int argc, char* argv[]) {
 //	Game_Manager gm(Player_Type::Computer, config);
 //	gm.start();
 
-	Gameboard b(config);
-	std::cout << b;
+	Game_Manager gm(Player_Type::Computer ,config);
+	std::cout << gm.get_gameboard() << std::endl;
 //	for (int i = 0; i < 28; ++i) {
 //		std::cout << b.get_space_at(i) -> get_type_char() << ", ";
 //	}

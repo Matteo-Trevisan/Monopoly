@@ -20,7 +20,6 @@ add_library(Space
 
 add_library(Player
         include/Player/Player.h
-        include/Player/Position.h
         src/Player/Player.cpp
 )
 
