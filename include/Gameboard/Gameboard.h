@@ -2,10 +2,12 @@
 #define GAMEBOARD_H
 
 #include <vector>
+#include <iomanip>
 #include "Player/Player.h"
 #include "Space/Space.h"
 #include "Config.h"
 #include "memory"
+#include "Colors.h"
 
 class Gameboard {
 public:

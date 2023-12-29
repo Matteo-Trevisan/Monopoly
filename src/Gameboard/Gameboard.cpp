@@ -4,13 +4,8 @@
 #include "Space/Start_Space.h"
 #include <random>
 #include <algorithm>
-#include <iomanip>
 
-#define RESET   "\033[0m"
-#define RED     "\033[31m"
-#define GREEN   "\033[32m"
-#define YELLOW  "\033[33m"
-#define BLUE    "\033[34m"
+
 
 Gameboard::Gameboard(Config config, std::vector<std::unique_ptr<Player>>* players) : players(players) {
     space_deck.reserve(24);

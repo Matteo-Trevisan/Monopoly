@@ -13,8 +13,8 @@ int main(int argc, char* argv[]) {
 					 50};
 
 	Game_Manager gm(Player_Type::Computer ,config);
-	gm.start();
+	gm.setup();
 	std::cout << gm.get_gameboard() << std::endl;
-	gm.run_game();
+	//gm.run_game();
 
 }

@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <string>
+#include <random>
 
 class Player {
 public:
@@ -15,8 +16,9 @@ public:
 	bool pay(Player& receiver, int value);
 	void set_position(int p);
 	void add_property();
-	void set_initial_dice_roll(int value);
-	int get_initial_dice_roll() const;
+	void set_dice_roll(int value);
+	int get_dice_roll() const;
+	int roll_dices(std::uniform_int_distribution<>& dices, std::mt19937& gen);
 	int get_position() const;
 	std::string get_name() const;
 	virtual bool offer(const std::string& offer) const;

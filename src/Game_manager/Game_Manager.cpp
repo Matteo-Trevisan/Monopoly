@@ -1,7 +1,7 @@
 
 #include "Game_manager/Game_Manager.h"
 #include <algorithm>
-#include <unistd.h>
+#include "unistd.h"
 
 Game_Manager::Game_Manager(Player_Type p, Config config) : gen(rd()){
 	players.reserve(4);
@@ -18,12 +18,53 @@ Game_Manager::Game_Manager(Player_Type p, Config config) : gen(rd()){
 	rand_dice = std::uniform_int_distribution<>(1, 6);
 }
 
-void Game_Manager::start() {
+void Game_Manager::setup() {
+
+	std::cout << RED << std::setw(25) << "MONOPOLY" << RESET << std::endl << draw_simple_line(40)
+	<< std::endl << BLUE <<  "Sorteggi per ordnie turni: " << RESET << std::endl;
+
 	for (auto& p : players) {
-		p->set_initial_dice_roll(rand_dice(gen) + rand_dice(gen));
+		//p->roll_dices(rand_dice, gen);
+		p->set_dice_roll(rand_dice(gen) + rand_dice(gen));
+		std::cout << "Giocatore " + p->get_name() + " ha tirato i dadi ottenendo un valore di " << p->get_dice_roll() << std::endl;
+		// sleep(1);	//TODO remove comments
 	}
 
-	std::sort(players.begin(), players.end(), compareByDiceRoll);
+	std::sort(players.begin(), players.end(), greaterRoll);
+
+	std::cout << std::endl;
+
+	for (int i = 0; i < players.size(); ++i) {
+
+		int j = i + 1;
+		int equal_rolls = 0;
+		while (j < players.size() && players.at(i)->get_dice_roll() == players.at(j)->get_dice_roll()) {
+			std::cout << "Giocatore " + players.at(i)->get_name() + " ha ottenuto lo stesso valore di Giocatore " << players.at(j)->get_name() << std::endl;
+			++equal_rolls;
+			++j;
+		}
+
+		if (equal_rolls == 0) {
+			continue;
+		}
+
+		for (j = i; j <= i + equal_rolls; ++j) {
+			players.at(j)->set_dice_roll(rand_dice(gen) + rand_dice(gen));
+			std::cout << "Giocatore " + players.at(j)->get_name() + " ha ritirato i dadi ottenendo un valore di " << players.at(j)->get_dice_roll() << std::endl;
+			// sleep(1); TODO remove comments
+		}
+
+		std::sort(players.begin(), players.end(), greaterRoll);
+		std::cout << std::endl;
+
+		--i;
+	}
+
+	std::cout << BLUE << "Ordine finale:" << RESET << std::endl;
+	for (auto& p : players) {
+		std::cout << "Giocatore " + p->get_name() << " ";
+	}
+	std::cout << std::endl << draw_simple_line(40) << std::endl;
 }
 
 const Gameboard& Game_Manager::get_gameboard() const {
@@ -74,7 +115,11 @@ void Game_Manager::run_game() {
 	}
 }
 
-bool compareByDiceRoll(const std::unique_ptr<Player>& a, const std::unique_ptr<Player>& b) {
-	return a->get_initial_dice_roll() < b->get_initial_dice_roll();
+std::string draw_simple_line(int length) {
+	return std::string(length, '-');
+}
+
+bool greaterRoll(const std::unique_ptr<Player>& a, const std::unique_ptr<Player>& b) {
+	return a->get_dice_roll() > b->get_dice_roll();
 }
 

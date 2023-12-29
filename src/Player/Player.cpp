@@ -37,11 +37,11 @@ void Player::add_property() {
 }
  */
 
-void Player::set_initial_dice_roll(int value) {
+void Player::set_dice_roll(int value) {
 	dice_roll = value;
 }
 
-int Player::get_initial_dice_roll() const {
+int Player::get_dice_roll() const {
 	return dice_roll;
 }
 
@@ -55,4 +55,9 @@ std::string Player::get_name() const {
 
 bool Player::offer(const std::string& offer) const {
 	return true;
+}
+
+int Player::roll_dices(std::uniform_int_distribution<>& dices, std::mt19937& gen) {
+	set_dice_roll(dices(gen) + dices(gen));
+	return get_dice_roll();
 }

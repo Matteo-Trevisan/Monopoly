@@ -35,6 +35,7 @@ add_library(Game_Manager
 add_library(Gameboard
         include/Gameboard/Gameboard.h
         src/Gameboard/Gameboard.cpp
+        include/Colors.h
 )
 
 add_executable(Monopoly

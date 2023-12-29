@@ -15,7 +15,7 @@ enum Player_Type {
 class Game_Manager {
 public:
 	explicit Game_Manager(Player_Type p, Config config);
-	void start();
+	void setup();
 	void run_game();
 	const Gameboard& get_gameboard() const;
 
@@ -28,6 +28,8 @@ private:
 };
 
 // comparison function object per riordinare i giocatori in base al valore del tiro dei dadi
-bool compareByDiceRoll(const std::unique_ptr<Player>& a, const std::unique_ptr<Player>& b);
+bool greaterRoll(const std::unique_ptr<Player>& a, const std::unique_ptr<Player>& b);
+
+std::string draw_simple_line(int length);
 
 #endif //GAME_MANAGER_H
