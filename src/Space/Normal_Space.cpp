@@ -83,10 +83,13 @@ std::string Normal_Space::get_current_building_char() const {
 	}
 }
 
-Player *Normal_Space::get_owner() {
-	return owner;
-}
-
-void Normal_Space::set_owner(Player* p) {
-	owner = p;
+std::string Normal_Space::get_next_building_name() const {
+	switch (building) {
+		case empty:
+			return "casa";
+		case house:
+			return "albergo";
+		case hotel:
+			return "";
+	}
 }

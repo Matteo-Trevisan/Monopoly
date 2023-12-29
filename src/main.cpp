@@ -7,14 +7,13 @@
 
 int main(int argc, char* argv[]) {
 
-	Config config = {{2,3,4,5,6, 'E'},
-					 {3,3,4,5,6, 'S'},
-					 {5,6,7,8,9, 'L'},
-					 50};
+	Config config = {{6,3,3,2,4, 'E'},
+					 {10,5,5,4,8, 'S'},
+					 {20,10,10,7,14, 'L'},
+					 15, 20};
 
 	Game_Manager gm(Player_Type::Computer ,config);
 	gm.setup();
-	std::cout << gm.get_gameboard() << std::endl;
-	//gm.run_game();
+	gm.run_game();
 
 }

@@ -3,7 +3,11 @@
 #include <iostream>
 #include <random>
 
-bool Computer_Player::offer(const std::string& offer) const {
+bool Computer_Player::offer(const std::string& offer, bool bypass_to_false) const {
+	if (bypass_to_false) {
+		return false;
+	}
+
 	std::cout << offer << " [S/N]: ";
 
 	std::random_device rd;

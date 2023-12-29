@@ -6,16 +6,15 @@
 
 class Start_Space : public Angular_Space{
 public:
-	explicit Start_Space(int startPassMoney) : start_pass_money(startPassMoney){};
-	int get_start_pass_money() const;
+	explicit Start_Space(int startPassMoney, Player *owner)
+	: Angular_Space(owner), start_pass_money(startPassMoney) {};
+	int get_start_pass_money() const override;
 	void set_start_pass_money(int startPassMoney);
-	char get_type_char() const;
+	char get_type_char() const override;
 
 private:
 	int start_pass_money;
 
 };
-
-
 
 #endif //START_SPACE_H

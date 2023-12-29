@@ -3,15 +3,15 @@
 
 #include <vector>
 #include <iomanip>
-#include "Player/Player.h"
 #include "Space/Space.h"
+#include "Player/Bank.h"
 #include "Config.h"
 #include "memory"
 #include "Colors.h"
 
 class Gameboard {
 public:
-    explicit Gameboard(Config config = Config(), std::vector<std::unique_ptr<Player>>* players = nullptr);
+    explicit Gameboard(Config config = Config(), std::vector<std::unique_ptr<Player>>* players = nullptr, Bank* bank = nullptr);
 	std::vector<std::unique_ptr<Player>>* get_players() const;
 	const std::unique_ptr<Space>& get_space_at(int i) const;
 	std::unique_ptr<Space>& get_space_at(int i);
@@ -23,7 +23,7 @@ private:
 
 class Print_Line {
 public:
-	Print_Line(bool mp = true, std::string col = std::string()) : middle_part(mp), color(col) {};
+	explicit Print_Line(bool mp = true, std::string col = std::string()) : middle_part(mp), color(col) {};
 	bool middle_part;
 	std::string color;
 };
