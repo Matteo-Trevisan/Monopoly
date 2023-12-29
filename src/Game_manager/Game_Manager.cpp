@@ -24,8 +24,7 @@ void Game_Manager::setup() {
 	<< std::endl << BLUE <<  "Sorteggi per ordnie turni: " << RESET << std::endl;
 
 	for (auto& p : players) {
-		//p->roll_dices(rand_dice, gen);
-		p->set_dice_roll(rand_dice(gen) + rand_dice(gen));
+		p->roll_dices(rand_dice, gen);
 		std::cout << "Giocatore " + p->get_name() + " ha tirato i dadi ottenendo un valore di " << p->get_dice_roll() << std::endl;
 		// sleep(1);	//TODO remove comments
 	}
@@ -49,7 +48,7 @@ void Game_Manager::setup() {
 		}
 
 		for (j = i; j <= i + equal_rolls; ++j) {
-			players.at(j)->set_dice_roll(rand_dice(gen) + rand_dice(gen));
+			players.at(j)->roll_dices(rand_dice, gen);
 			std::cout << "Giocatore " + players.at(j)->get_name() + " ha ritirato i dadi ottenendo un valore di " << players.at(j)->get_dice_roll() << std::endl;
 			// sleep(1); TODO remove comments
 		}
@@ -87,7 +86,6 @@ void Game_Manager::run_game() {
 		++i;
 		if (i >=4 ) i = 0;
 
-		return;	// TODO prima di eseguire impostare qualche tipo di ritorno altrimenti va in loop infinito
 
 
 		auto& current_player = *players.at(i);
