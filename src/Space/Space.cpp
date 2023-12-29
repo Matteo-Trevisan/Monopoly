@@ -49,6 +49,10 @@ std::string Space::get_current_building_char() const {
 	return "";
 }
 
+std::string Space::get_next_building_name() const {
+	return "";
+}
+
 std::string Space::get_name() const {
 	return name;
 }
@@ -58,10 +62,15 @@ void Space::set_name(const std::string& value) {
 }
 
 Player *Space::get_owner() {
-	return nullptr;
+	return owner;
 }
 
 void Space::set_owner(Player* p) {
+	owner = p;
+}
+
+int Space::get_start_pass_money() const {
+	return 0;
 }
 
 

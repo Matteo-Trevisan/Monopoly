@@ -13,7 +13,7 @@ enum Building {
 
 class Normal_Space : public Space{
 public:
-	explicit Normal_Space(Space_Data type) : Normal_Space::Space(std::string()), building(Building::empty), data(type), owner(nullptr) {};
+	explicit Normal_Space(Space_Data type) : Normal_Space::Space(std::string()), building(Building::empty), data(type){};
 
 	int get_terrain_sale_price() const override;
 	int get_house_sale_price() const override;
@@ -23,17 +23,15 @@ public:
 	int get_overnight_stay_price() override;
 	int get_next_upgrade_price() override;
 	std::string get_current_building_char() const override;
+	std::string get_next_building_name() const override;
 	bool upgradable() override;
 	void upgrade() override;
 	void reset() override;
     char get_type_char() const override;
-	Player* get_owner() override;
-	void set_owner(Player* p) override;
 
 private:
 	Building building;
 	Space_Data data;
-	Player* owner;
 
 };
 

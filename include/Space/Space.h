@@ -8,21 +8,23 @@
 
 class Space {
 public:
-	explicit Space(std::string name) : name(name) {};
+	explicit Space(std::string name, Player* owner = nullptr) : name(name), owner(owner) {};
 	virtual int get_terrain_sale_price() const;
 	virtual int get_house_sale_price() const;
 	virtual int get_hotel_sale_price() const;
 	virtual int get_house_overnight_stay_price() const;
 	virtual int get_hotel_overnight_stay_price() const;
 	virtual std::string get_current_building_char() const;
+	virtual std::string get_next_building_name() const;
 	virtual int get_overnight_stay_price();
 	virtual int get_next_upgrade_price();
 	virtual bool upgradable();
 	virtual void upgrade();
 	virtual void reset();
 	virtual char get_type_char() const;
-	virtual Player* get_owner();
-	virtual void set_owner(Player* p);
+	virtual int get_start_pass_money() const;
+	Player* get_owner();
+	void set_owner(Player* p);
 
 
 	std::string get_name() const;
@@ -30,6 +32,8 @@ public:
 
 private:
 	std::string name;
+protected:
+	Player* owner;
 };
 
 std::ostream &operator<<(std::ostream &os, const Space &d);

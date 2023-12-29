@@ -25,6 +25,8 @@ add_library(Player
         include/Player/Human_Player.h
         src/Player/Computer_Player.cpp
         include/Player/Computer_Player.h
+        src/Player/Bank.cpp
+        include/Player/Bank.h
 )
 
 add_library(Game_Manager
