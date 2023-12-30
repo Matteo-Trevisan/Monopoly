@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "unistd.h"		// For sleep function
 
-Game_Manager::Game_Manager(Player_Type p, Config config) : fisrt_player_type(p),  gen(rd()), bank(Bank(config.initial_balance * 20, "Banca")) {
+Game_Manager::Game_Manager(Player_Type p, Config config) : fisrt_player_type(p), gen(rd()) {
 	players.reserve(4);
 	if (p) {
 		players.emplace_back(new Human_Player(config.initial_balance, "1"));
@@ -14,6 +14,7 @@ Game_Manager::Game_Manager(Player_Type p, Config config) : fisrt_player_type(p),
 	for (int i = 0; i < 3; ++i) {
 		players.emplace_back(new Computer_Player(config.initial_balance, std::to_string(i+2)));
 	}
+	bank = Bank(config.initial_balance * 20, "Banca");
 	gameboard = Gameboard(config, &players, &bank);
 	rand_dice = std::uniform_int_distribution<>(1, 6);
 }

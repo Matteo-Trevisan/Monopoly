@@ -6,7 +6,7 @@
 
 class Bank : public Player{
 public:
-	Bank(int initialBalance, const std::string &name);
+	explicit Bank(int initialBalance = 100000, const std::string &name = "Banca");
 
 };
 
