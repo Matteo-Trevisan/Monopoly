@@ -15,6 +15,7 @@ public:
 	std::vector<std::unique_ptr<Player>>* get_players() const;
 	const std::unique_ptr<Space>& get_space_at(int i) const;
 	std::unique_ptr<Space>& get_space_at(int i);
+	std::vector<std::unique_ptr<Space>>& get_space_deck();
 
 private:
 	std::vector<std::unique_ptr<Space>> space_deck;

@@ -195,6 +195,11 @@ void Game_Manager::run_game() {
 				// TODO no abbastanza soldi => bancarotta
 				std::cout << "Bancarotta: " << current_player.get_name() << std::endl;
 				current_player.bankrupt();
+				for (auto& s : gameboard.get_space_deck()) {
+					if (s->get_owner() == &current_player) {
+						s->reset();
+					}
+				}
 			}
 		}
 

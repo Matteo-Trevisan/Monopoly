@@ -53,6 +53,14 @@ std::string Space::get_next_building_name() const {
 	return "";
 }
 
+int Space::get_start_pass_money() const {
+	return 0;
+}
+
+void Space::set_start_pass_money(int startPassMoney) {
+
+}
+
 std::string Space::get_name() const {
 	return name;
 }
@@ -67,10 +75,6 @@ Player *Space::get_owner() {
 
 void Space::set_owner(Player* p) {
 	owner = p;
-}
-
-int Space::get_start_pass_money() const {
-	return 0;
 }
 
 

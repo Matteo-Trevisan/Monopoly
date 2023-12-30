@@ -9,7 +9,7 @@ public:
 	explicit Start_Space(int startPassMoney, Player *owner)
 	: Angular_Space(owner), start_pass_money(startPassMoney) {};
 	int get_start_pass_money() const override;
-	void set_start_pass_money(int startPassMoney);
+	void set_start_pass_money(int startPassMoney) override;
 	char get_type_char() const override;
 
 private:

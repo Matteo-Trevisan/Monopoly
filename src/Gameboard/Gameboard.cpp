@@ -56,6 +56,10 @@ std::vector<std::unique_ptr<Player>>* Gameboard::get_players() const {
 	return players;
 }
 
+std::vector<std::unique_ptr<Space>> &Gameboard::get_space_deck() {
+	return space_deck;
+}
+
 std::string get_space_info(int i, const Gameboard &g) {
 	std::string ret;
 	const std::unique_ptr<Space>& uptr = g.get_space_at(i);
