@@ -4,6 +4,7 @@
 
 #include "Player/Human_Player.h"
 #include <iostream>
+#include <algorithm>
 
 bool Human_Player::offer(const std::string& offer, bool bypass_to_false) const {
 	std::cout << offer << " [S/N]: ";
