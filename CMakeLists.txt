@@ -20,13 +20,13 @@ add_library(Space
 
 add_library(Player
         include/Player/Player.h
+        include/Player/Human_Player.h
+        include/Player/Computer_Player.h
+        include/Player/Bank.h
         src/Player/Player.cpp
         src/Player/Human_Player.cpp
-        include/Player/Human_Player.h
         src/Player/Computer_Player.cpp
-        include/Player/Computer_Player.h
         src/Player/Bank.cpp
-        include/Player/Bank.h
 )
 
 add_library(Game_Manager
@@ -35,9 +35,9 @@ add_library(Game_Manager
 )
 
 add_library(Gameboard
+        include/Colors.h
         include/Gameboard/Gameboard.h
         src/Gameboard/Gameboard.cpp
-        include/Colors.h
 )
 
 add_executable(Monopoly
