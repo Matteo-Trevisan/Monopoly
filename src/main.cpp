@@ -3,8 +3,6 @@
 #include "Game_manager/Game_Manager.h"
 #include "Config.h"
 
-#include <iomanip>
-
 int main(int argc, char* argv[]) {
 
 	Config config = {{6,3,3,2,4, 'E'},

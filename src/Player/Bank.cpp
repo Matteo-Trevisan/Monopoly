@@ -1,6 +1,3 @@
-//
-// Created by Matteo Trevisan on 29/12/23.
-//
 
 #include "Player/Bank.h"
 

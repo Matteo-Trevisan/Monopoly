@@ -1,6 +1,5 @@
 
 #include "Space/Start_Space.h"
-#include "iostream"
 
 int Start_Space::get_start_pass_money() const {
 	return start_pass_money;

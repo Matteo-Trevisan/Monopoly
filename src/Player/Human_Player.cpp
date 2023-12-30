@@ -1,6 +1,3 @@
-//
-// Created by Matteo Trevisan on 28/12/23.
-//
 
 #include "Player/Human_Player.h"
 #include <iostream>
