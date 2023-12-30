@@ -5,9 +5,9 @@
 #include "Player.h"
 
 class Bank : public Player{
-
 public:
 	Bank(int initialBalance, const std::string &name);
+
 };
 
 

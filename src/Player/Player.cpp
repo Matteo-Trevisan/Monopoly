@@ -51,8 +51,8 @@ std::string Player::get_name() const {
 	return name;
 }
 
-bool Player::offer(const std::string& offer, bool bypass_to_false) const {
-	return bypass_to_false;
+bool Player::offer(const std::string& offer) const {
+	return false;
 }
 
 int Player::roll_dices(std::uniform_int_distribution<>& dices, std::mt19937& gen) {
@@ -82,6 +82,6 @@ std::string Player::get_properties() const {
 	return ret;
 }
 
-bool Player::print_offer() const {
+bool Player::print_offer() {
 	return false;
 }

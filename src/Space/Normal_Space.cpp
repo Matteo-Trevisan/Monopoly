@@ -92,4 +92,5 @@ std::string Normal_Space::get_next_building_name() const {
 		case hotel:
 			return "";
 	}
+	return "";
 }

@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "unistd.h"		// For sleep function
 
-Game_Manager::Game_Manager(Player_Type p, Config config) : fisrt_player_type(p),  gen(rd()), bank(config.initial_balance * 20, "Banca") {
+Game_Manager::Game_Manager(Player_Type p, Config config) : fisrt_player_type(p),  gen(rd()), bank(Bank(config.initial_balance * 20, "Banca")) {
 	players.reserve(4);
 	if (p) {
 		players.emplace_back(new Human_Player(config.initial_balance, "1"));

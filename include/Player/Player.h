@@ -24,8 +24,8 @@ public:
 	std::string get_name() const;
 	void bankrupt();
 	int get_balance() const;
-	virtual bool offer(const std::string& offer, bool bypass_to_false = 0) const;
-	virtual bool print_offer() const;
+	virtual bool offer(const std::string& offer) const;
+	virtual bool print_offer();
 
 private:
 	int dice_roll;

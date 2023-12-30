@@ -3,7 +3,7 @@
 #include <iostream>
 #include <algorithm>
 
-bool Human_Player::offer(const std::string& offer, bool bypass_to_false) const {
+bool Human_Player::offer(const std::string& offer) const {
 	std::cout << offer << " [S/N]: ";
 	while (true) {
 		std::string response;
@@ -19,7 +19,7 @@ bool Human_Player::offer(const std::string& offer, bool bypass_to_false) const {
 	}
 }
 
-bool Human_Player::print_offer() const {
+bool Human_Player::print_offer() {
 	std::cout << "Digitare [S]  per visualizzare (show) il tabellone, \n[N] per continuare senza visualizzarlo: ";
 	while (true) {
 		std::string response;
