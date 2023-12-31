@@ -24,6 +24,7 @@ add_library(Derived_Space
         src/Space/Normal_Space.cpp
         src/Space/Angular_Space.cpp
         src/Space/Start_Space.cpp
+        include/Game_manager/Reprint.h
 )
 
 add_library(Player
@@ -40,6 +41,7 @@ add_library(Player
 add_library(Game_Manager
         include/Game_manager/Game_Manager.h
         src/Game_manager/Game_Manager.cpp
+        src/Game_manager/Reprint.cpp
 )
 
 add_library(Gameboard

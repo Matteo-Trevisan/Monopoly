@@ -21,8 +21,9 @@ Game_Manager::Game_Manager(Player_Type p, Config config) : fisrt_player_type(p),
 
 void Game_Manager::setup() {
 
+
 	std::cout << RED << std::setw(30) << "MONOPOLY" << RESET << std::endl << print_simple_line()
-	<< std::endl << BLUE <<  "Sorteggi per ordnie turni: " << RESET << std::endl;
+	<< std::endl << BLUE <<  "Sorteggi per ordine turni: " << RESET << std::endl;
 
 	for (auto& p : players) {
 		p->roll_dices(rand_dice, gen);
@@ -183,7 +184,7 @@ void Game_Manager::run_game() {
 
 		// Se la casella non è di nessuno offre di comprarla
 		if (arrival_space.get_owner() == nullptr) {		// TODO ti chiede se vuoi aquistarla anche se non hai abbastanza soldi: da cambiare
-			if(arrival_space.get_terrain_sale_price() < current_player.get_balance()) {
+			if(current_player.has_enough_money(arrival_space.get_terrain_sale_price())) {
                 bool offer = current_player.offer(
                         "Giocatore " + current_player.get_name() + ", vuoi acquistare la proprietà " +
                         arrival_space.get_name() + " a " + std::to_string(arrival_space.get_terrain_sale_price()) +
