@@ -13,6 +13,10 @@ void Reprint::closeFile() {
     }
 }
 
+Reprint::~Reprint() {
+	closeFile();
+}
+
 template<typename T>
 Reprint &Reprint::operator<<(const T &data) {
     std::cout << data;

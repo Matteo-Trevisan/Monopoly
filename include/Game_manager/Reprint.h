@@ -15,12 +15,14 @@ public:
 
     Reprint() = default;
 
-    void openFile(const std::string& filename);
+	virtual ~Reprint();
+
+	void openFile(const std::string& filename);
 
     void closeFile();
 
     template<typename T>
-    Reprint& operator<<(const T& data);
+    Reprint& operator<<(const T& data);		// TODO Class Reprint not working
 };
 
 #endif //MONOPOLY_REPRINT_H

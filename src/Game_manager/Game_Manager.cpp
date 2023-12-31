@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "unistd.h"		// For sleep function
 
-Game_Manager::Game_Manager(Player_Type p, Config config) : fisrt_player_type(p), gen(rd()) {
+Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& filename) : fisrt_player_type(p), gen(rd()) {
 	players.reserve(4);
 	if (p) {
 		players.emplace_back(new Human_Player(config.initial_balance, "1"));
@@ -17,6 +17,7 @@ Game_Manager::Game_Manager(Player_Type p, Config config) : fisrt_player_type(p),
 	bank = Bank(config.initial_balance * 20, "Banca");
 	gameboard = Gameboard(config, &players, &bank);
 	rand_dice = std::uniform_int_distribution<>(1, 6);
+	reprint.openFile(filename);
 }
 
 void Game_Manager::setup() {
@@ -262,7 +263,7 @@ std::vector<std::string> Game_Manager::get_winner(int value) {
 }
 
 
-void Game_Manager::print_player_vector(const std::vector<Player*> &vec) {
+void print_player_vector(const std::vector<Player*> &vec) {
     if (!vec.empty()) {
 		for (int i = 0; i < vec.size(); ++i) {
 			std::cout << "Giocatore " << vec.at(i)->get_name();
