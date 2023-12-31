@@ -106,6 +106,10 @@ void Game_Manager::run_game() {
 			if (player->isPlaying()) ++giocatori_in_gioco;
 		}
 		if (giocatori_in_gioco == 1) {
+            for (const auto & player : players) {
+                if (player->isPlaying())
+                    std::cout << "Ha vinto Giocatore " << player->get_name();
+            }
 			return;		//TODO implemetare la vincita
 		}
 
@@ -175,14 +179,19 @@ void Game_Manager::run_game() {
 
 		// Se la casella non è di nessuno offre di comprarla
 		if (arrival_space.get_owner() == nullptr) {		// TODO ti chiede se vuoi aquistarla anche se non hai abbastanza soldi: da cambiare
-			bool offer = current_player.offer("Giocatore " + current_player.get_name() + ", vuoi acquistare la proprietà " + arrival_space.get_name() + " a " + std::to_string(arrival_space.get_terrain_sale_price()) +  " fiorini?");
-			if (offer) {
-				current_player.pay(bank, arrival_space.get_terrain_sale_price());
-				arrival_space.set_owner(&current_player);
-				std::cout << "Acquistato proprietà" << std::endl; // TODO Stampare meglio
-				current_player.add_property(arrival_space.get_name());
-			}
-			continue;
+			if(arrival_space.get_terrain_sale_price() < current_player.get_balance()) {
+                bool offer = current_player.offer(
+                        "Giocatore " + current_player.get_name() + ", vuoi acquistare la proprietà " +
+                        arrival_space.get_name() + " a " + std::to_string(arrival_space.get_terrain_sale_price()) +
+                        " fiorini?");
+                if (offer) {
+                    current_player.pay(bank, arrival_space.get_terrain_sale_price());
+                    arrival_space.set_owner(&current_player);
+                    std::cout << "Acquistato proprietà" << std::endl; // TODO Stampare meglio
+                    current_player.add_property(arrival_space.get_name());
+                }
+            }
+			continue; // TODO questo continue va dentro o fuori dall'if subito sopra?
 		}
 
 		// Se la cella di arrivo è della banca (Angular_Space oppure Start_space)
