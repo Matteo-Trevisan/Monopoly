@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
 					 {20,10,10,7,14, 'L'},
 					 100, 20};
 
-	Game_Manager gm(Player_Type::Human, config);
+	Game_Manager gm(Player_Type::Computer, config);
 	gm.setup();
 	gm.run_game();
 

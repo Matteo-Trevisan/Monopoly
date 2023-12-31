@@ -9,6 +9,8 @@
 #include "Player/Bank.h"
 #include "Gameboard/Gameboard.h"
 
+
+
 enum Player_Type {
 	Computer, Human
 };
@@ -28,6 +30,9 @@ private:
 	std::random_device rd;
 	std::mt19937 gen;
 	std::uniform_int_distribution<> rand_dice;
+    std::vector<std::string> get_winner(int value);
+    template<typename T>
+    void print_player_vector(const std::vector<T>& vec);
 };
 
 // comparison function object per riordinare i giocatori in base al valore del tiro dei dadi

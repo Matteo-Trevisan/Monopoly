@@ -76,7 +76,29 @@ void Game_Manager::run_game() {
 	int turno = 1;
 	while(true) {
 		//	Controllo fine partita
-		if (turno == 21 && fisrt_player_type == Player_Type::Computer) {
+		if (turno == 8 && fisrt_player_type == Player_Type::Computer) {
+            int max_balance = 0;
+            int winner_count = 0;
+            for (const auto & player : players) {
+                if (player->isPlaying()) {
+                    if(player->get_balance() > max_balance)
+                        max_balance = player->get_balance();
+                }
+            }
+            for (const auto & player : players) {
+                if (player->isPlaying())
+                    if(player->get_balance() == max_balance) winner_count++;
+            }
+
+            if(winner_count > 1) {
+                std::cout << "I vincitori sono ";
+                print_player_vector(get_winner(max_balance));
+            }
+            else {
+                std::cout << "Il vincitore è ";
+                print_player_vector(get_winner(max_balance));
+            }
+
 			return;	// TODO da implemetare la vincita per numero di fiorini
 		}
 		int giocatori_in_gioco = 0;
@@ -213,6 +235,31 @@ void Game_Manager::run_game() {
 	}
 }
 
+std::vector<std::string> Game_Manager::get_winner(int value) {
+    std::vector<std::string> winner;
+    for (const auto & player : players) {
+        if (player->isPlaying()) {
+            if(player->get_balance() == value) {
+                winner.push_back(player->get_name());
+            }
+        }
+    }
+    return winner;
+}
+
+template<typename T>
+void Game_Manager::print_player_vector(const std::vector<T> &vec) {
+    if (!vec.empty()) {
+        auto iter = vec.begin();
+        std::cout << "Giocatore " << *iter;
+        ++iter;
+        for (; iter != vec.end(); ++iter) {
+            std::cout << ", " << *iter;
+        }
+    }
+}
+
+
 std::string print_simple_line(int length) {
 	return std::string(length, '-');
 }
@@ -220,4 +267,6 @@ std::string print_simple_line(int length) {
 bool greaterRoll(const std::unique_ptr<Player>& a, const std::unique_ptr<Player>& b) {
 	return a->get_dice_roll() > b->get_dice_roll();
 }
+
+
 
