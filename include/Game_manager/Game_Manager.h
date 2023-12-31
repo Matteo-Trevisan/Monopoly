@@ -31,8 +31,7 @@ private:
 	std::mt19937 gen;
 	std::uniform_int_distribution<> rand_dice;
     std::vector<std::string> get_winner(int value);
-    template<typename T>
-    void print_player_vector(const std::vector<T>& vec);
+    static void print_player_vector(const std::vector<Player*>& vec);
 };
 
 // comparison function object per riordinare i giocatori in base al valore del tiro dei dadi

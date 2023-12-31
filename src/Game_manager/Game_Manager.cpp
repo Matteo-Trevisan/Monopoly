@@ -75,42 +75,46 @@ void Game_Manager::run_game() {
 	int player_index = -1;
 	int turno = 1;
 	while(true) {
-		//	Controllo fine partita
+
+		//	Controllo fine partita nel caso di giocatori computer
 		if (turno == 8 && fisrt_player_type == Player_Type::Computer) {
             int max_balance = 0;
-            int winner_count = 0;
             for (const auto & player : players) {
                 if (player->isPlaying()) {
                     if(player->get_balance() > max_balance)
                         max_balance = player->get_balance();
                 }
             }
+			std::vector<Player*> winners;
             for (const auto & player : players) {
                 if (player->isPlaying())
-                    if(player->get_balance() == max_balance) winner_count++;
+                    if(player->get_balance() == max_balance) winners.push_back(player.get());
             }
 
-            if(winner_count > 1) {
+            if(winners.size() == 1) {
                 std::cout << "I vincitori sono ";
-                print_player_vector(get_winner(max_balance));
             }
             else {
                 std::cout << "Il vincitore è ";
-                print_player_vector(get_winner(max_balance));
             }
-
-			return;	// TODO da implemetare la vincita per numero di fiorini
+			print_player_vector(winners);
+			// TODO stampare su file la vincita
+			return;
 		}
+
+		// controllo fine partita per numero giocatori
 		int giocatori_in_gioco = 0;
+		Player* potential_winner;
 		for (const auto & player : players) {
-			if (player->isPlaying()) ++giocatori_in_gioco;
+			if (player->isPlaying()) {
+				++giocatori_in_gioco;
+				potential_winner = player.get();
+			}
 		}
 		if (giocatori_in_gioco == 1) {
-            for (const auto & player : players) {
-                if (player->isPlaying())
-                    std::cout << "Ha vinto Giocatore " << player->get_name();
-            }
-			return;		//TODO implemetare la vincita
+			std::cout << "Ha vinto Giocatore " << potential_winner->get_name() << "!" << std::endl;
+			// TODO stampare su file la vincita
+			return;
 		}
 
 		// selezionare prossimo gicatore
@@ -256,15 +260,16 @@ std::vector<std::string> Game_Manager::get_winner(int value) {
     return winner;
 }
 
-template<typename T>
-void Game_Manager::print_player_vector(const std::vector<T> &vec) {
+
+void Game_Manager::print_player_vector(const std::vector<Player*> &vec) {
     if (!vec.empty()) {
-        auto iter = vec.begin();
-        std::cout << "Giocatore " << *iter;
-        ++iter;
-        for (; iter != vec.end(); ++iter) {
-            std::cout << ", " << *iter;
-        }
+		for (int i = 0; i < vec.size(); ++i) {
+			std::cout << "Giocatore " << vec.at(i)->get_name();
+			if (vec.size() > 1 && i < vec.size() - 2) {
+				std::cout << ", ";
+			}
+		}
+		std::cout << std::endl;
     }
 }
 
