@@ -21,8 +21,9 @@ Game_Manager::Game_Manager(Player_Type p, Config config) : fisrt_player_type(p),
 
 void Game_Manager::setup() {
 
+
 	std::cout << RED << std::setw(30) << "MONOPOLY" << RESET << std::endl << print_simple_line()
-	<< std::endl << BLUE <<  "Sorteggi per ordnie turni: " << RESET << std::endl;
+	<< std::endl << BLUE <<  "Sorteggi per ordine turni: " << RESET << std::endl;
 
 	for (auto& p : players) {
 		p->roll_dices(rand_dice, gen);

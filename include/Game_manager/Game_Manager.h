@@ -8,6 +8,7 @@
 #include "Player/Computer_Player.h"
 #include "Player/Bank.h"
 #include "Gameboard/Gameboard.h"
+#include "Game_manager/Reprint.h"   // per scrittura sul log_file
 
 
 
@@ -23,6 +24,7 @@ public:
 	const Gameboard& get_gameboard() const;
 
 private:
+    Reprint reprint;
 	Player_Type fisrt_player_type;
 	Gameboard gameboard;
 	std::vector<std::unique_ptr<Player>> players;
