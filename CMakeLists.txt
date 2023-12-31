@@ -6,13 +6,19 @@ set(CMAKE_CXX_STANDARD 11)
 include_directories(include)
 include_directories(src)
 
+add_executable(Monopoly
+        src/main.cpp)
+
 add_library(Space
         include/Space/Space_Data.h
         include/Space/Space.h
+        src/Space/Space.cpp
+)
+
+add_library(Derived_Space
         include/Space/Normal_Space.h
         include/Space/Angular_Space.h
         include/Space/Start_Space.h
-        src/Space/Space.cpp
         src/Space/Normal_Space.cpp
         src/Space/Angular_Space.cpp
         src/Space/Start_Space.cpp
@@ -37,17 +43,18 @@ add_library(Game_Manager
 add_library(Gameboard
         include/Gameboard/Gameboard.h
         src/Gameboard/Gameboard.cpp
+        include/Colors.h
+)
+
+target_link_libraries(Space
+        Derived_Space
+        Player
 )
 
 target_link_libraries(Game_Manager
-        Player
-        Space
         Gameboard
+        Space
 )
-
-add_executable(Monopoly
-        include/Colors.h
-        src/main.cpp)
 
 target_link_libraries(Monopoly
         Game_Manager
