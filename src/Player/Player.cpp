@@ -73,11 +73,8 @@ int Player::get_balance() const {
 
 std::string Player::get_properties() const {
 	std::string ret;
-	for (int i = 0; i < properties.size(); ++i) {
-		ret += properties.at(i);
-		if (i != properties.size() - 1) {
-			ret += ", ";
-		}
+	for (const auto & property : properties) {
+		ret += property + ", ";
 	}
 	return ret;
 }

@@ -35,11 +35,15 @@ Gameboard::Gameboard(Config config, std::vector<std::unique_ptr<Player>>* player
 
 	// assegnazione dei nomi a ogni casella
 	for (int i = 7; i >= 0; --i) {
+		//Riga orizzontale bassa
 		space_deck.at(i)->set_name("H" + std::to_string(8-i));
+		// Riga orizzontale alta
 		space_deck.at(i+14)->set_name("A" + std::to_string(i+1));
 	}
 	for (int i = 0; i < 6; ++i) {
+		// Colonna verticale sinistra
 		space_deck.at(i+8)->set_name(std::string(1, char(71-i))+ "1");
+		// Colonna verticale destra
 		space_deck.at(i+22)->set_name(std::string(1, char(66+i))+ "8");
 	}
 }

@@ -101,24 +101,30 @@ void Game_Manager::run_game() {
 		auto& current_player = *players.at(player_index);
 
 		std::cout << "\n" << print_simple_line(19) << " Giocatore " << current_player.get_name() << " " <<  print_simple_line(19) << std::endl;
-		std::cout << "Saldo: " << current_player.get_balance() << "; Proprietà: " << current_player.get_properties() << " Posizione: " << gameboard.get_space_at(current_player.get_position())->get_name() << std::endl << std::endl;
+		std::cout << "Saldo: " << current_player.get_balance() << " fiorini;   Posizione: " << gameboard.get_space_at(current_player.get_position())->get_name() << ";   Proprietà: " << current_player.get_properties() << std::endl << std::endl;
 
 		if (current_player.print_offer()) {
+			// stampa tabellone
 			std::cout << gameboard << std::endl << std::endl;
+
+			// stampa lista proprietà per giocatore
 			std::cout << "PROPRIETA'" << std::endl;
 			for (const auto & p : players) {
 				std::cout << "Giocatore " << p->get_name() << ": " << p->get_properties() << std::endl;
 			}
+
+			// stampa lista saldo per giocatore
 			std::cout << std::endl << "SALDO" << std::endl;
 			for (const auto & p : players) {
 				std::cout << "Giocatore " << p->get_name() << ": " << p->get_balance() << " fiorini" << std::endl;
 			}
+
 			std::cout << "Press ENTER to continue...";
 			std::cin.ignore();
 			std::cin.get();
 		}
 
-		// Salva la posizione iniziale del giocatore
+		// Salva la posizione iniziale del giocatore (per controllare se passa per il via)
 		int prev_pos = current_player.get_position();
 
 		// Tira i dadi
@@ -128,7 +134,7 @@ void Game_Manager::run_game() {
 		// Sposta il giocatore
 		current_player.set_position((current_player.get_position() + current_player.get_dice_roll()) % 28);
 
-		// Ottiene una reference alla casella di arrivo del giocatore
+		// Ottiene una reference alla casella di arrivo del giocatore + stampa posizione di arrivo
 		Space& arrival_space = *gameboard.get_space_at(current_player.get_position());
 		std::cout << "Giocatore " + current_player.get_name() + " è arrivato alla casella " << arrival_space.get_name() << " ";
 		if (arrival_space.get_owner() != nullptr && arrival_space.get_owner() != &bank) {
@@ -146,7 +152,7 @@ void Game_Manager::run_game() {
 		}
 
 		// Se la casella non è di nessuno offre di comprarla
-		if (arrival_space.get_owner() == nullptr) {
+		if (arrival_space.get_owner() == nullptr) {		// TODO ti chiede se vuoi aquistarla anche se non hai abbastanza soldi: da cambiare
 			bool offer = current_player.offer("Giocatore " + current_player.get_name() + ", vuoi acquistare la proprietà " + arrival_space.get_name() + " a " + std::to_string(arrival_space.get_terrain_sale_price()) +  " fiorini?");
 			if (offer) {
 				current_player.pay(bank, arrival_space.get_terrain_sale_price());
@@ -195,6 +201,7 @@ void Game_Manager::run_game() {
 				// TODO no abbastanza soldi => bancarotta
 				std::cout << "Bancarotta: " << current_player.get_name() << std::endl;
 				current_player.bankrupt();
+				// Reset delle celle del giocatore
 				for (auto& s : gameboard.get_space_deck()) {
 					if (s->get_owner() == &current_player) {
 						s->reset();

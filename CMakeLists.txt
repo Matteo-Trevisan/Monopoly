@@ -3,6 +3,8 @@ project(Monopoly)
 
 set(CMAKE_CXX_STANDARD 11)
 
+add_compile_options(-O2)
+
 include_directories(include)
 include_directories(src)
 
