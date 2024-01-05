@@ -8,6 +8,7 @@
 class Angular_Space : public Space {
 public:
 	explicit Angular_Space(Player* owner) : Angular_Space::Space(std::string(), owner) {};
+	~Angular_Space() override;
 	char get_type_char() const override;
 };
 

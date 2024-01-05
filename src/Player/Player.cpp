@@ -81,3 +81,5 @@ std::string Player::get_properties() const {
 bool Player::print_offer() {
 	return false;
 }
+
+Player::~Player() = default;

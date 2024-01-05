@@ -18,3 +18,5 @@ bool Computer_Player::offer(const std::string& offer) const {
 		return false;
 	}
 }
+
+Computer_Player::~Computer_Player() = default;

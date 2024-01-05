@@ -7,7 +7,7 @@
 class Bank : public Player{
 public:
 	explicit Bank(int initialBalance = 100000, const std::string &name = "Banca");
-
+	~Bank() override;
 };
 
 

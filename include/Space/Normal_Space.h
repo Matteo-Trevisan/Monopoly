@@ -10,7 +10,7 @@
 class Normal_Space : public Space{
 public:
 	explicit Normal_Space(Space_Data type) : Normal_Space::Space(std::string()), building(Building::empty), data(type){};
-
+	~Normal_Space() override;
 	int get_terrain_sale_price() const override;
 	int get_house_sale_price() const override;
 	int get_hotel_sale_price() const override;

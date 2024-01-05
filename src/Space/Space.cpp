@@ -1,6 +1,8 @@
 
 #include "Space/Space.h"
 
+Space::~Space() = default;
+
 int Space::get_terrain_sale_price() const {
 	return 0;
 }
