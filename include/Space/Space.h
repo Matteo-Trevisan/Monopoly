@@ -6,6 +6,10 @@
 #include <string>
 #include "Player/Player.h"
 
+enum Building {
+	empty, house, hotel
+};
+
 class Space {
 public:
 	explicit Space(std::string name, Player* owner = nullptr) : name(name), owner(owner) {};
@@ -14,6 +18,7 @@ public:
 	virtual int get_hotel_sale_price() const;
 	virtual int get_house_overnight_stay_price() const;
 	virtual int get_hotel_overnight_stay_price() const;
+	virtual Building get_current_building() const;
 	virtual std::string get_current_building_char() const;
 	virtual std::string get_next_building_name() const;
 	virtual int get_overnight_stay_price();

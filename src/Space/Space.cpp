@@ -77,6 +77,10 @@ void Space::set_owner(Player* p) {
 	owner = p;
 }
 
+Building Space::get_current_building() const {
+	return Building::empty;
+}
+
 
 std::ostream &operator<<(std::ostream &os, const Space &d) {
 	return os << d.get_type_char();

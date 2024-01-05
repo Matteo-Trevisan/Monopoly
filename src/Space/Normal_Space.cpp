@@ -94,3 +94,7 @@ std::string Normal_Space::get_next_building_name() const {
 	}
 	return "";
 }
+
+Building Normal_Space::get_current_building() const {
+	return building;
+}

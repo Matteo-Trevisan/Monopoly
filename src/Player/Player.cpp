@@ -1,4 +1,3 @@
-
 #include "Player/Player.h"
 
 bool Player::isPlaying() const {

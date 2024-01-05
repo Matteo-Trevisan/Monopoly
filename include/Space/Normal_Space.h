@@ -7,10 +7,6 @@
 #include "Player/Player.h"
 #include "iostream"
 
-enum Building {
-	empty, house, hotel
-};
-
 class Normal_Space : public Space{
 public:
 	explicit Normal_Space(Space_Data type) : Normal_Space::Space(std::string()), building(Building::empty), data(type){};
@@ -22,6 +18,7 @@ public:
 	int get_hotel_overnight_stay_price() const override;
 	int get_overnight_stay_price() override;
 	int get_next_upgrade_price() override;
+	Building get_current_building() const override;
 	std::string get_current_building_char() const override;
 	std::string get_next_building_name() const override;
 	bool upgradable() override;
