@@ -8,8 +8,7 @@
 #include "Player/Computer_Player.h"
 #include "Player/Bank.h"
 #include "Gameboard/Gameboard.h"
-#include "Game_manager/Reprint.h"   // per scrittura sul log_file
-
+#include "OstreamFork.h"
 
 
 enum Player_Type {
@@ -19,20 +18,24 @@ enum Player_Type {
 class Game_Manager {
 public:
 	explicit Game_Manager(Player_Type p, Config config, const std::string& filename);
+	~Game_Manager();
 	void setup();
 	void run_game();
+
 	const Gameboard& get_gameboard() const;
 
 private:
-    Reprint reprint;
+	OstreamFork osf;
+	std::ofstream log_file;
+
 	Player_Type fisrt_player_type;
 	Gameboard gameboard;
 	std::vector<std::unique_ptr<Player>> players;
 	Bank bank;
+
 	std::random_device rd;
 	std::mt19937 gen;
 	std::uniform_int_distribution<> rand_dice;
-    std::vector<std::string> get_winner(int value);
 
 };
 

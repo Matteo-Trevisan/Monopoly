@@ -1,5 +1,5 @@
 
-#include "Game_manager/Game_Manager.h"
+#include "Game_Manager.h"
 #include <algorithm>
 #include "unistd.h"		// For sleep function
 
@@ -17,7 +17,8 @@ Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& file
 	bank = Bank(config.initial_balance * 20, "Banca");
 	gameboard = Gameboard(config, &players, &bank);
 	rand_dice = std::uniform_int_distribution<>(1, 6);
-	reprint.openFile(filename);
+	log_file = std::ofstream( filename) ;
+	osf = OstreamFork( &log_file , &std::cout ) ;
 }
 
 void Game_Manager::setup() {
@@ -28,7 +29,7 @@ void Game_Manager::setup() {
 
 	for (auto& p : players) {
 		p->roll_dices(rand_dice, gen);
-		std::cout << "Giocatore " + p->get_name() + " ha tirato i dadi ottenendo un valore di " << p->get_dice_roll() << std::endl;
+		osf << "Giocatore " + p->get_name() + " ha tirato i dadi ottenendo un valore di " << p->get_dice_roll() << std::endl;
 		sleep(1);
 	}
 
@@ -246,20 +247,11 @@ void Game_Manager::run_game() {
 				}
 			}
 		}
-
 	}
 }
 
-std::vector<std::string> Game_Manager::get_winner(int value) {
-    std::vector<std::string> winner;
-    for (const auto & player : players) {
-        if (player->isPlaying()) {
-            if(player->get_balance() == value) {
-                winner.push_back(player->get_name());
-            }
-        }
-    }
-    return winner;
+Game_Manager::~Game_Manager() {
+	log_file.close();
 }
 
 
