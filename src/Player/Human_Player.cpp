@@ -34,3 +34,5 @@ bool Human_Player::print_offer() {
 		std::cout << "Invalid response: ";
 	}
 }
+
+Human_Player::~Human_Player() = default;

@@ -10,6 +10,7 @@ class Player {
 public:
 	explicit Player(int initial_balance, const std::string& name) :
 	balance(initial_balance), pos(0), name(name), dice_roll(0) {};
+	virtual ~Player();
 	bool isPlaying() const;
 	bool has_enough_money(int value) const;
 	bool pay(int value);
@@ -25,6 +26,7 @@ public:
 	void bankrupt();
 	int get_balance() const;
 	virtual bool offer(const std::string& offer) const;
+
 	virtual bool print_offer();
 
 private:

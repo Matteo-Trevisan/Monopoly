@@ -1,6 +1,8 @@
 
 #include "Space/Normal_Space.h"
 
+Normal_Space::~Normal_Space() = default;
+
 int Normal_Space::get_terrain_sale_price() const {
 	return data.terrain_sale;
 }
