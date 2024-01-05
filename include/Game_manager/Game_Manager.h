@@ -18,7 +18,6 @@ enum Player_Type {
 class Game_Manager {
 public:
 	explicit Game_Manager(Player_Type p, Config config, const std::string& filename);
-	~Game_Manager();
 	void setup();
 	void run_game();
 
@@ -43,6 +42,6 @@ private:
 bool greaterRoll(const std::unique_ptr<Player>& a, const std::unique_ptr<Player>& b);
 
 std::string print_simple_line(int length = 51);
-void print_player_vector(const std::vector<Player*>& vec);
+std::string player_vector_to_string(const std::vector<Player*>& vec);
 
 #endif //GAME_MANAGER_H

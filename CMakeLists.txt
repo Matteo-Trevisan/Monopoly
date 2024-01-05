@@ -38,7 +38,12 @@ add_library(Gameboard
 add_library(Game_Manager
         include/Game_manager/Game_Manager.h
         src/Game_manager/Game_Manager.cpp
+)
 
+add_library(OstreamFork
+        include/Game_manager/OstreamFork.h
+        include/Game_manager/OstreamFork.hpp
+        src/Game_manager/OstreamFork.cpp
 )
 
 
@@ -51,7 +56,7 @@ target_include_directories(Game_Manager PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inclu
 
 # Collega le librerie
 target_link_libraries(Space Derived_Space Player)
-target_link_libraries(Game_Manager Gameboard Space)
+target_link_libraries(Game_Manager Gameboard Space OstreamFork)
 target_link_libraries(Monopoly Game_Manager)
 
 
