@@ -53,6 +53,7 @@ target_include_directories(Derived_Space PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/incl
 target_include_directories(Player PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/Player)
 target_include_directories(Gameboard PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/Gameboard)
 target_include_directories(Game_Manager PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/Game_manager)
+target_include_directories(OstreamFork PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/Game_manager)
 
 # Collega le librerie
 target_link_libraries(Space Derived_Space Player)
