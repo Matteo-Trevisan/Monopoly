@@ -224,7 +224,7 @@ void Game_Manager::run_game() {
 					current_player.add_property(arrival_space.get_name());
 
 					// stampa l'acquisto
-					osf << "Giocatore" << current_player.get_name() << " ha acquistato il terreno " << arrival_space.get_name() << std::endl;
+					osf << "Giocatore " << current_player.get_name() << " ha acquistato il terreno " << arrival_space.get_name() << std::endl;
                 } else {
 					std::cout << "Giocatore " << current_player.get_name() << " ha rifiutato l'offerta." << std::endl;
 				}
