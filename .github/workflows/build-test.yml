@@ -14,12 +14,9 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    - name: Set up C++ compiler
-      uses: actions/setup-cpp@v2
-      with:
-        compiler: 'gcc'  # or 'clang' depending on your preference
-
     - name: Build
+      env:
+          CXX: gcc
       run: |
         mkdir build
         cd build
