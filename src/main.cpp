@@ -37,4 +37,5 @@ int main(int argc, char* argv[]) {
 	gm.setup();
 	gm.run_game();
 
+	return 0;
 }
