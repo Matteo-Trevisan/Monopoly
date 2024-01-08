@@ -65,7 +65,7 @@ void Game_Manager::setup() {
 
 	std::cout << BLUE << "Ordine finale:" << RESET << std::endl;
 	for (auto& p : players) {
-		std::cout << "Giocatore " + p->get_name() << " ";
+		std::cout << "Giocatore " + p->get_name() << "  ";
 	}
 	std::cout << std::endl << print_simple_line() << std::endl;
 }
@@ -190,7 +190,7 @@ void Game_Manager::run_game() {
 		// Stampa posizione di arrivo del giocatore
 		osf << "Giocatore " + current_player.get_name() + " è arrivato alla casella " << arrival_space.get_name() << " ";
 		if (arrival_space.get_owner() != nullptr && arrival_space.get_owner() != &bank) {
-			std::cout << "di proprietà del Giocatore" << arrival_space.get_owner()->get_name();
+			std::cout << "di proprietà del Giocatore " << arrival_space.get_owner()->get_name();
 		}
 		osf << std::endl;
 
@@ -277,7 +277,7 @@ void Game_Manager::run_game() {
 			if (current_player.pay(*arrival_space.get_owner(), arrival_space.get_overnight_stay_price())) {
 
 				// Giocatore X paga Giocatore Y
-				osf << "Giocatore " << current_player.get_name() << " ha pagato " << arrival_space.get_overnight_stay_price() << " fiorini a giocatore "
+				osf << "Giocatore " << current_player.get_name() << " ha pagato " << arrival_space.get_overnight_stay_price() << " fiorini a Giocatore "
 				<< arrival_space.get_owner()->get_name() << " per pernottamento nella casella " << arrival_space.get_name() << std::endl;
 			} else {
 
