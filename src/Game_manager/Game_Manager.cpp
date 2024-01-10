@@ -3,6 +3,10 @@
 #include <algorithm>
 #include "unistd.h"		// For sleep function
 
+const Gameboard& Game_Manager::get_gameboard() const {
+	return gameboard;
+}
+
 Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& filename) : fisrt_player_type(p), gen(rd()) {
 	players.reserve(4);
 	if (p) {
@@ -23,9 +27,11 @@ Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& file
 
 void Game_Manager::setup() {
 
-
 	std::cout << RED << std::setw(30) << "MONOPOLY" << RESET << std::endl << print_simple_line()
-	<< std::endl << BLUE <<  "Sorteggi per ordine turni: " << RESET << std::endl;
+	<< std::endl << BLUE;
+	osf <<  "Sorteggi per ordine turni: ";
+	std::cout << RESET;
+	osf << std::endl;
 
 	for (auto& p : players) {
 		p->roll_dices(rand_dice, gen);
@@ -67,45 +73,19 @@ void Game_Manager::setup() {
 	for (auto& p : players) {
 		std::cout << "Giocatore " + p->get_name() << "  ";
 	}
-	std::cout << std::endl << print_simple_line() << std::endl;
-}
-
-const Gameboard& Game_Manager::get_gameboard() const {
-	return gameboard;
+	osf << std::endl << print_simple_line() << std::endl;
 }
 
 void Game_Manager::run_game() {
 	int player_index = -1;
 	int turno = 1;
-	while(true) {		// TODO stampare fine turno e dividere in piu funzioni
+	while(true) {
 
 		//	Controllo fine partita per numero turni (come da richiesta prof nel forum)
-		if (turno == 11) {
-
-			// cerca quale è il numero più alto di fiorini
-            int max_balance = 0;
-            for (const auto & player : players) {
-                if (player->isPlaying()) {
-                    if(player->get_balance() > max_balance)
-                        max_balance = player->get_balance();
-                }
-            }
-
-			// Seleziona i giocatori vincitori
-			std::vector<Player*> winners;
-            for (const auto & player : players) {
-                if (player->isPlaying())
-                    if(player->get_balance() == max_balance) winners.push_back(player.get());
-            }
+		if (turno == 21) {
 
 			// Stampa i vincitori
-			std::cout << "\n" << print_simple_line() << "\n";
-			osf << std::endl << player_vector_to_string(winners);
-			if(winners.size() == 1) {
-				osf << " ha vinto la partita" << std::endl;
-			} else {
-				osf << " hanno vinto la partita" << std::endl;
-			}
+			print_balance_winning();
 
 			// exit program
 			return;
@@ -147,7 +127,7 @@ void Game_Manager::run_game() {
 
 
 		// delay di 1 secondo
-		sleep(1);
+		sleep(0);
 
 		// Stampa situazione attuale del giocatore
 		std::cout << "\n" << print_simple_line(19) << " Giocatore " << current_player.get_name() << " " <<  print_simple_line(19) << std::endl;
@@ -163,25 +143,7 @@ void Game_Manager::run_game() {
 
 		// Offre al giocatore umano di stampare il tabellone
 		if (current_player.print_offer()) {
-
-			// stampa tabellone
-			std::cout << gameboard << std::endl << std::endl;
-
-			// stampa lista proprietà per giocatore
-			std::cout << "PROPRIETA'" << std::endl;
-			for (const auto & p : players) {
-				std::cout << "Giocatore " << p->get_name() << ": " << p->get_properties() << std::endl;
-			}
-
-			// stampa lista fiorini per giocatore
-			std::cout << std::endl << "SALDO" << std::endl;
-			for (const auto & p : players) {
-				std::cout << "Giocatore " << p->get_name() << ": " << p->get_balance() << " fiorini" << std::endl;
-			}
-
-			std::cout << "Press ENTER to continue...";
-			std::cin.ignore();
-			std::cin.get();
+			print_player_info();
 		}
 
 		// Salva la posizione iniziale del giocatore (per controllare se passa per il via)
@@ -209,7 +171,7 @@ void Game_Manager::run_game() {
 		//
 		if (current_player.get_position() < prev_pos){
 			int start_pass_money_amount = gameboard.get_space_at(0)->get_start_pass_money();
-			bank.pay(current_player, start_pass_money_amount);
+			current_player.increment_balance(start_pass_money_amount);
 			osf << "Giocatore " << current_player.get_name() << " è passato dal via e ha ritirato " << start_pass_money_amount << " fiorini" << std::endl;
 		}
 
@@ -217,30 +179,8 @@ void Game_Manager::run_game() {
 		// Se la casella non è di nessuno offre di comprarla
 		//
 		if (arrival_space.get_owner() == nullptr) {
-			if(current_player.has_enough_money(arrival_space.get_terrain_sale_price())) {
-                bool offer = current_player.offer(
-                        "Giocatore " + current_player.get_name() + ", vuoi acquistare la proprietà " +
-                        arrival_space.get_name() + " a " + std::to_string(arrival_space.get_terrain_sale_price()) +
-                        " fiorini?");
-                if (offer) {
-
-					// paga il terreno
-                    current_player.pay(bank, arrival_space.get_terrain_sale_price());
-
-					// imposta il proprietario sulla casella
-                    arrival_space.set_owner(&current_player);
-
-					// aggiunge la proprietà alla lista per comodità di stampa
-					current_player.add_property(arrival_space.get_name());
-
-					// stampa l'acquisto
-					osf << "Giocatore " << current_player.get_name() << " ha acquistato il terreno " << arrival_space.get_name() << std::endl;
-                } else {
-					std::cout << "Giocatore " << current_player.get_name() << " ha rifiutato l'offerta." << std::endl;
-				}
-			} else {
-				std::cout << "Giocatore " << current_player.get_name() << " non ha abbastanza fiorini per comprare il terreno." << std::endl;
-			}
+			buy_space_manager(current_player, arrival_space);
+			print_player_turn_end(current_player);
 			continue;
 		}
 
@@ -249,6 +189,7 @@ void Game_Manager::run_game() {
 		// non fare niente e continua
 		//
 		if (arrival_space.get_owner() == &bank) {
+			print_player_turn_end(current_player);
 			continue;
 		}
 
@@ -256,55 +197,142 @@ void Game_Manager::run_game() {
 		// Se la cella di arrivo è del giocatore offre di fare upgrade della cella
 		// se le condizioni sono favorevoli (cella upgradable e abbastanza soldi)
 		//
-		if (arrival_space.get_owner() == &current_player) {
-			if (!arrival_space.upgradable()) {
-				continue;
-			}
-			if (current_player.has_enough_money(arrival_space.get_next_upgrade_price())) {
-				bool offer = current_player.offer("Vuoi migliorare la proprietà " + arrival_space.get_name() + ", costruendo una " + arrival_space.get_next_building_name() + ", al costo di " + std::to_string(arrival_space.get_next_upgrade_price()) + " fiorini?");
-				if (offer) {
-					current_player.pay(bank, arrival_space.get_terrain_sale_price());
-					arrival_space.upgrade();
-					if (arrival_space.get_current_building() == Building::house) {
-						osf << "Giocatore " << current_player.get_name() << " ha costruito una casa sul terreno " << arrival_space.get_name() << std::endl;
-					} else if (arrival_space.get_current_building() == Building::hotel){
-						osf << "Giocatore " << current_player.get_name() << " ha migliorato una casa in albergo sul terreno " << arrival_space.get_name() << std::endl;
-					}
-				} else {
-					std::cout << "Giocatore " << current_player.get_name() << " ha rifiutato l'offerta." << std::endl;
-				}
-				continue;
-			} else {
-				std::cout << "Giocatore " << current_player.get_name() << " non ha abbastanza fiorini per migliorare la casella." << std::endl;
-				continue;
-			}
+		if (arrival_space.get_owner() == &current_player && arrival_space.upgradable()) {
+			upgrade_space_manager(current_player,arrival_space);
+			print_player_turn_end(current_player);
+			continue;
 		}
 
 		//
 		// Se la cella non è del giocatore allora paga il pernottamento
 		//
-		if (arrival_space.get_owner() != &current_player && !arrival_space.get_current_building_char().empty()) {
-			if (current_player.pay(*arrival_space.get_owner(), arrival_space.get_overnight_stay_price())) {
-
-				// Giocatore X paga Giocatore Y
-				osf << "Giocatore " << current_player.get_name() << " ha pagato " << arrival_space.get_overnight_stay_price() << " fiorini a Giocatore "
-				<< arrival_space.get_owner()->get_name() << " per pernottamento nella casella " << arrival_space.get_name() << std::endl;
-			} else {
-
-				// Bancarotta, Giocatore eliminato
-				osf << "Giocatore " << current_player.get_name() << " è stato eliminato." << std::endl;
-				current_player.bankrupt();
-
-				// Reset delle celle del giocatore
-				for (auto& s : gameboard.get_space_deck()) {
-					if (s->get_owner() == &current_player) {
-						s->reset();
-					}
-				}
-			}
+		if (arrival_space.get_owner() != &current_player && arrival_space.get_current_building() != Building::empty) {
+			overnight_payment_manager(current_player, arrival_space);
+			print_player_turn_end(current_player);
+			continue;
 		}
 
 	}
+}
+
+void Game_Manager::print_balance_winning() {
+	// cerca quale è il numero più alto di fiorini
+	int max_balance = 0;
+	for (const auto & player : players) {
+		if (player->isPlaying()) {
+			if(player->get_balance() > max_balance)
+				max_balance = player->get_balance();
+		}
+	}
+
+	// Seleziona i giocatori vincitori
+	std::vector<Player*> winners;
+	for (const auto & player : players) {
+		if (player->isPlaying())
+			if(player->get_balance() == max_balance) winners.push_back(player.get());
+	}
+
+	std::cout << "\n" << print_simple_line() << "\n";
+	osf << std::endl << player_vector_to_string(winners);
+	if(winners.size() == 1) {
+		osf << " ha vinto la partita" << std::endl;
+	} else {
+		osf << " hanno vinto la partita" << std::endl;
+	}
+}
+
+void Game_Manager::print_player_info() {
+	// stampa tabellone
+	std::cout << gameboard << std::endl << std::endl;
+
+	// stampa lista proprietà per giocatore
+	std::cout << "PROPRIETA'" << std::endl;
+	for (const auto & p : players) {
+		std::cout << "Giocatore " << p->get_name() << ": " << p->get_properties() << std::endl;
+	}
+
+	// stampa lista fiorini per giocatore
+	std::cout << std::endl << "SALDO" << std::endl;
+	for (const auto & p : players) {
+		std::cout << "Giocatore " << p->get_name() << ": " << p->get_balance() << " fiorini" << std::endl;
+	}
+
+	std::cout << "Press ENTER to continue...";
+	std::cin.ignore();
+	std::cin.get();
+}
+
+void Game_Manager::buy_space_manager(Player& current_player, Space& arrival_space) {
+	if(current_player.has_enough_money(arrival_space.get_terrain_sale_price())) {
+
+		// propone l'offerta
+		bool offer = current_player.offer(
+				"Giocatore " + current_player.get_name() + ", vuoi acquistare la proprietà " +
+				arrival_space.get_name() + " a " + std::to_string(arrival_space.get_terrain_sale_price()) +
+				" fiorini?");
+		if (offer) {
+
+			// paga il terreno
+			current_player.pay(arrival_space.get_terrain_sale_price());
+
+			// imposta il proprietario sulla casella
+			arrival_space.set_owner(&current_player);
+
+			// aggiunge la proprietà alla lista per comodità di stampa
+			current_player.add_property(arrival_space.get_name());
+
+			// stampa l'acquisto
+			osf << "Giocatore " << current_player.get_name() << " ha acquistato il terreno " << arrival_space.get_name() << std::endl;
+		} else {
+			std::cout << "Giocatore " << current_player.get_name() << " ha rifiutato l'offerta." << std::endl;
+		}
+	} else {
+		std::cout << "Giocatore " << current_player.get_name() << " non ha abbastanza fiorini per comprare il terreno." << std::endl;
+	}
+}
+
+void Game_Manager::upgrade_space_manager(Player &current_player, Space &arrival_space) {
+	if (current_player.has_enough_money(arrival_space.get_next_upgrade_price())) {
+		bool offer = current_player.offer("Vuoi migliorare la proprietà " + arrival_space.get_name() + ", costruendo una " + arrival_space.get_next_building_name() + ", al costo di " + std::to_string(arrival_space.get_next_upgrade_price()) + " fiorini?");
+		if (offer) {
+			current_player.pay(arrival_space.get_terrain_sale_price());
+			arrival_space.upgrade();
+			if (arrival_space.get_current_building() == Building::house) {
+				osf << "Giocatore " << current_player.get_name() << " ha costruito una casa sul terreno " << arrival_space.get_name() << std::endl;
+			} else if (arrival_space.get_current_building() == Building::hotel){
+				osf << "Giocatore " << current_player.get_name() << " ha migliorato una casa in albergo sul terreno " << arrival_space.get_name() << std::endl;
+			}
+		} else {
+			std::cout << "Giocatore " << current_player.get_name() << " ha rifiutato l'offerta." << std::endl;
+		}
+	} else {
+		std::cout << "Giocatore " << current_player.get_name() << " non ha abbastanza fiorini per migliorare la casella." << std::endl;
+	}
+}
+
+void Game_Manager::overnight_payment_manager(Player &current_player, Space &arrival_space) {
+	if (current_player.pay(*arrival_space.get_owner(), arrival_space.get_overnight_stay_price())) {
+
+		// Giocatore X paga Giocatore Y
+		osf << "Giocatore " << current_player.get_name() << " ha pagato " << arrival_space.get_overnight_stay_price() << " fiorini a Giocatore "
+			<< arrival_space.get_owner()->get_name() << " per pernottamento nella casella " << arrival_space.get_name() << std::endl;
+	} else {
+
+		// Bancarotta, Giocatore eliminato
+		osf << "Giocatore " << current_player.get_name() << " è stato eliminato." << std::endl;
+		current_player.bankrupt();
+
+		// Reset delle celle del giocatore
+		for (auto& s : gameboard.get_space_deck()) {
+			if (s->get_owner() == &current_player) {
+				s->reset();
+			}
+		}
+	}
+}
+
+void Game_Manager::print_player_turn_end(Player &current_player) {
+	osf << "Giocatore " << current_player.get_name() <<" ha finito il turno" << std::endl;
 }
 
 

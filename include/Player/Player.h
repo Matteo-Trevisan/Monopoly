@@ -15,6 +15,7 @@ public:
 	bool has_enough_money(int value) const;
 	bool pay(int value);
 	bool pay(Player& receiver, int value);
+	void increment_balance(int value);
 	void set_position(int p);
 	void add_property(const std::string& space_name);
 	std::string get_properties() const;
