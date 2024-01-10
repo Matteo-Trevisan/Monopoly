@@ -22,7 +22,9 @@ bool Player::pay(Player &receiver, int value) {
 		this->balance -= value;
 		receiver.balance += value;
 		return true;
-	}
+	} else {
+        receiver.balance += this->balance;
+    }
 	return false;
 }
 
