@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <random>
+#include <unordered_set>
 #include "Player/Human_Player.h"
 #include "Player/Computer_Player.h"
 #include "Player/Bank.h"
@@ -45,6 +46,9 @@ private:
 
 // comparison function object per riordinare i giocatori in base al valore del tiro dei dadi
 bool greaterRoll(const std::unique_ptr<Player>& a, const std::unique_ptr<Player>& b);
+
+// controlla che i tiri di dadi dei giocatori sono diversi tra loro
+bool are_all_dice_unique(const std::vector<std::unique_ptr<Player>>& players);
 
 std::string print_simple_line(int length = 51);
 std::string player_vector_to_string(const std::vector<Player*>& vec);
