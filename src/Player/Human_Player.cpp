@@ -1,7 +1,7 @@
 
 #include "Player/Human_Player.h"
 #include <iostream>
-#include <algorithm>
+#include <string>
 
 bool Human_Player::offer(const std::string& offer) const {
 	std::cout << offer << " [S/N]: ";

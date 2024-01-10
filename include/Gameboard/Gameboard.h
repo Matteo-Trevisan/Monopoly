@@ -24,7 +24,7 @@ private:
 
 class Print_Line {
 public:
-	explicit Print_Line(bool mp = true, std::string col = std::string()) : middle_part(mp), color(col) {};
+	explicit Print_Line(bool mp = true, const std::string& col = std::string()) : middle_part(mp), color(col) {};
 	bool middle_part;
 	std::string color;
 };

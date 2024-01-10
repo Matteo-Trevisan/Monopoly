@@ -1,13 +1,19 @@
 
 #include "Game_Manager.h"
-#include <algorithm>
+#include <vector>
+#include <random>
+#include "Player/Human_Player.h"
+#include "Player/Computer_Player.h"
+#include "Player/Bank.h"
+#include "Gameboard/Gameboard.h"
+#include "OstreamFork.h"
 #include "unistd.h"		// For sleep function
 
 const Gameboard& Game_Manager::get_gameboard() const {
 	return gameboard;
 }
 
-Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& filename) : fisrt_player_type(p), gen(rd()) {
+Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& filename) : gen(rd()) {
 	players.reserve(4);
 	if (p) {
 		players.emplace_back(new Human_Player(config.initial_balance, "1"));

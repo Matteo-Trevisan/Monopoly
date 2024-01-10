@@ -12,7 +12,7 @@ enum Building {
 
 class Space {
 public:
-	explicit Space(std::string name, Player* owner = nullptr) : name(name), owner(owner) {};
+	explicit Space(const std::string& name, Player* owner = nullptr);
 	virtual ~Space();
 	virtual int get_terrain_sale_price() const;
 	virtual int get_house_sale_price() const;

@@ -1,6 +1,7 @@
 #ifndef OSTREAMFORK_HPP
 #define OSTREAMFORK_HPP
 
+
 // For data: int, long , ...
 template <class Data>
 OstreamFork &operator<<(OstreamFork &osf, Data d) {
