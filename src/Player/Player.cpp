@@ -24,6 +24,7 @@ bool Player::pay(Player &receiver, int value) {
 		return true;
 	} else {
         receiver.balance += this->balance;
+		this -> balance = -1;
     }
 	return false;
 }
@@ -32,7 +33,7 @@ void Player::set_position(int p) {
 	pos = p;
 }
 
-void Player::add_property(std::string space_name) {
+void Player::add_property(const std::string& space_name) {
 	properties.push_back(space_name);
 }
 

@@ -137,18 +137,28 @@ void Game_Manager::run_game() {
 			std::cout << std::endl << MAGENTA << print_simple_line() << std::endl << std::setw(30) << "Turno " << turno << std::endl <<  print_simple_line() << RESET << std::endl;
 		}
 
+		// Incrementa il numero di turno
 		if (player_index == 3) {
 			++turno;
 		}
 
-		// delay di 1 secondo
-		sleep(1);
-
 		// salva riferimento al giocatore attuale per comodità
 		auto& current_player = *players.at(player_index);
 
+
+		// delay di 1 secondo
+		sleep(1);
+
 		// Stampa situazione attuale del giocatore
 		std::cout << "\n" << print_simple_line(19) << " Giocatore " << current_player.get_name() << " " <<  print_simple_line(19) << std::endl;
+
+		// Salta giocatore eliminato
+		if (!current_player.isPlaying()) {
+			std::cout << "GIOCATORE ELIMINATO" << std::endl;
+			continue;
+		}
+
+		// Stampa info giocatore
 		std::cout << "Saldo: " << current_player.get_balance() << " fiorini;   Posizione: " << gameboard.get_space_at(current_player.get_position())->get_name() << ";   Proprietà: " << current_player.get_properties() << std::endl << std::endl;
 
 		// Offre al giocatore umano di stampare il tabellone
