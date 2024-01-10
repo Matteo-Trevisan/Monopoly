@@ -1,5 +1,7 @@
 
 #include "Space/Normal_Space.h"
+#include "Space.h"
+#include <string>
 
 Normal_Space::~Normal_Space() = default;
 

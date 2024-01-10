@@ -27,7 +27,6 @@ private:
 	OstreamFork osf;
 	std::ofstream log_file;
 
-	Player_Type fisrt_player_type;
 	Gameboard gameboard;
 	std::vector<std::unique_ptr<Player>> players;
 	Bank bank;

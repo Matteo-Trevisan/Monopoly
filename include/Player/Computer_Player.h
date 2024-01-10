@@ -3,6 +3,8 @@
 #define COMPUTER_PLAYER_H
 
 #include "Player.h"
+#include <vector>
+#include <string>
 
 class Computer_Player : public Player{
 public:

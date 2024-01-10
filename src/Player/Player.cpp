@@ -1,4 +1,7 @@
 #include "Player/Player.h"
+#include <vector>
+#include <string>
+#include <random>
 
 bool Player::isPlaying() const {
 	return balance >= 0;

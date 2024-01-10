@@ -6,6 +6,7 @@
 #include "Space_Data.h"
 #include "Player/Player.h"
 #include "iostream"
+#include <string>
 
 class Normal_Space : public Space{
 public:

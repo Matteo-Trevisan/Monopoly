@@ -1,6 +1,8 @@
 
 #include "Space/Space.h"
 
+Space::Space(const std::string& name, Player* owner) : name(name), owner(owner) {}
+
 Space::~Space() = default;
 
 int Space::get_terrain_sale_price() const {

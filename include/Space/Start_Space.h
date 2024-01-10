@@ -3,6 +3,8 @@
 #define START_SPACE_H
 
 #include "Angular_Space.h"
+#include "Player/Player.h"
+#include <string>
 
 class Start_Space : public Angular_Space{
 public:

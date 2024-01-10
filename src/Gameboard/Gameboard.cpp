@@ -1,11 +1,17 @@
 
 #include "Gameboard/Gameboard.h"
-#include "Space/Normal_Space.h"
-#include "Space/Start_Space.h"
+#include <random>
+#include <vector>
 #include <random>
 #include <algorithm>
-
-
+#include <iomanip>
+#include "Space/Normal_Space.h"
+#include "Space/Start_Space.h"
+#include "Space/Space.h"
+#include "Player/Bank.h"
+#include "Config.h"
+#include "memory"
+#include "Colors.h"
 
 Gameboard::Gameboard(Config config, std::vector<std::unique_ptr<Player>>* players, Bank* bank) : players(players) {
     space_deck.reserve(24);

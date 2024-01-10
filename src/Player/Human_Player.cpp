@@ -1,6 +1,7 @@
 
 #include "Player/Human_Player.h"
 #include <iostream>
+#include <string>
 #include <algorithm>
 
 bool Human_Player::offer(const std::string& offer) const {
@@ -8,8 +9,7 @@ bool Human_Player::offer(const std::string& offer) const {
 	while (true) {
 		std::string response;
 		std::cin >> response;
-		std::transform(response.begin(), response.end(),
-					   response.begin(), ::toupper);
+		std::transform(response.begin(), response.end(),response.begin(), ::toupper);
 		if (response == "S") {
 			return true;
 		} else if (response == "N") {

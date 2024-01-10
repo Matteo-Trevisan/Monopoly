@@ -3,6 +3,7 @@
 #define BANK_H
 
 #include "Player.h"
+#include <string>
 
 class Bank : public Player{
 public:
