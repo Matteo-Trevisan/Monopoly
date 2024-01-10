@@ -2,6 +2,7 @@
 #include "Game_Manager.h"
 #include <vector>
 #include <random>
+#include <algorithm>
 #include "Player/Human_Player.h"
 #include "Player/Computer_Player.h"
 #include "Player/Bank.h"
