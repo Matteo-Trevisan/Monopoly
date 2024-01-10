@@ -36,6 +36,12 @@ private:
 	std::mt19937 gen;
 	std::uniform_int_distribution<> rand_dice;
 
+	void print_balance_winning();
+	void print_player_info();
+	void buy_space_manager(Player& current_player, Space& arrival_space);
+	void upgrade_space_manager(Player& current_player, Space& arrival_space);
+	void overnight_payment_manager(Player& current_player, Space& arrival_space);
+	void print_player_turn_end(Player& current_player);
 };
 
 // comparison function object per riordinare i giocatori in base al valore del tiro dei dadi

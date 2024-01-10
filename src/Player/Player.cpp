@@ -85,4 +85,8 @@ bool Player::print_offer() {
 	return false;
 }
 
+void Player::increment_balance(int value) {
+	balance += value;
+}
+
 Player::~Player() = default;
