@@ -16,7 +16,7 @@ public:
 	bool pay(int value);
 	bool pay(Player& receiver, int value);
 	void set_position(int p);
-	void add_property(std::string space_name);
+	void add_property(const std::string& space_name);
 	std::string get_properties() const;
 	void set_dice_roll(int value);
 	int get_dice_roll() const;
