@@ -6,6 +6,7 @@
 
 bool Human_Player::offer(const std::string& offer) const {
 	std::cout << offer << " [S/N]: ";
+	return true;
 	while (true) {
 		std::string response;
 		std::cin >> response;
@@ -21,6 +22,7 @@ bool Human_Player::offer(const std::string& offer) const {
 
 bool Human_Player::print_offer() {
 	std::cout << "Digitare [S]  per visualizzare (show) il tabellone, \n[N] per continuare senza visualizzarlo: ";
+	return false;
 	while (true) {
 		std::string response;
 		std::cin >> response;

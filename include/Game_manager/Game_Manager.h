@@ -19,13 +19,14 @@ class Game_Manager {
 public:
 	explicit Game_Manager(Player_Type p, Config config, const std::string& filename);
 	void setup();
-	void run_game();
+	std::string run_game();
 
 	const Gameboard& get_gameboard() const;
 
 private:
 	OstreamFork osf;
 	std::ofstream log_file;
+	int max_turn;
 
 	Gameboard gameboard;
 	std::vector<std::unique_ptr<Player>> players;
@@ -35,7 +36,7 @@ private:
 	std::mt19937 gen;
 	std::uniform_int_distribution<> rand_dice;
 
-	void print_balance_winning();
+	std::string print_balance_winning();
 	void print_player_info();
 	void buy_space_manager(Player& current_player, Space& arrival_space);
 	void upgrade_space_manager(Player& current_player, Space& arrival_space);

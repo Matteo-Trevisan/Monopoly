@@ -1,6 +1,7 @@
 
 #include "Game_manager/Game_Manager.h"
 #include "Config.h"
+#include <unordered_map>
 
 std::string usage() {
 	std::string ret;
@@ -28,14 +29,37 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	Config config = {{6,3,3,2,4, 'E'},
-					 {10,5,5,4,8, 'S'},
-					 {20,10,10,7,14, 'L'},
-					 100, 20};
+	Config config = {{90,60,60,40,135, 'E'},
+					  {190,100,100,75,175, 'S'},
+					  {340,150,150,100,250, 'L'},
+					  1500, 100, 100};
 
-	Game_Manager gm(pt, config, "log_file.txt");
-	gm.setup();
-	gm.run_game();
+	std::unordered_map<std::string, int> statistic;
+
+	// Save the original cout buffer
+	std::streambuf* original_cout = std::cout.rdbuf();
+
+	// Redirect cout to null (suppress output)
+	std::ofstream nullStream("/dev/null");  // On Unix-like systems
+	// std::ofstream nullStream("nul");      // On Windows
+
+	// Redirect cout to nullStream
+	std::cout.rdbuf(nullStream.rdbuf());
+
+
+	for (int i = 0; i < 1000; ++i) {
+		Game_Manager gm(pt, config, "log_file.txt");
+		gm.setup();
+		statistic[gm.run_game()]++;
+	}
+
+	// Restore the original cout buffer
+	std::cout.rdbuf(original_cout);
+
+	for (const auto& entry : statistic) {
+		std::cout << "Valore: " << entry.first << ", Occorrenze: " << entry.second << std::endl;
+	}
+
 
 	return 0;
 }

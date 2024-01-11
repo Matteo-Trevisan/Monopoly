@@ -31,6 +31,7 @@ Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& file
 	rand_dice = std::uniform_int_distribution<>(1, 6);
 	log_file = std::ofstream( filename) ;
 	osf = OstreamFork( &log_file , &std::cout ) ;
+	max_turn = config.max_turn;
 }
 
 void Game_Manager::setup() {
@@ -44,7 +45,7 @@ void Game_Manager::setup() {
 	for (auto& p : players) {
 		p->roll_dices(rand_dice, gen);
 		osf << "Giocatore " + p->get_name() + " ha tirato i dadi ottenendo un valore di " << p->get_dice_roll() << std::endl;
-		sleep(1);
+		sleep(0);
 	}
 
 	std::sort(players.begin(), players.end(), greaterRoll);
@@ -72,7 +73,7 @@ void Game_Manager::setup() {
                 players.at(j)->roll_dices(rand_dice, gen);
                 osf << "Giocatore " + players.at(j)->get_name() + " ha ritirato i dadi ottenendo un valore di "
                     << players.at(j)->get_dice_roll() << std::endl;
-                sleep(1);
+                sleep(0);
             }
 
             std::sort(players.begin(), players.end(), greaterRoll);
@@ -89,19 +90,18 @@ void Game_Manager::setup() {
 	osf << std::endl << print_simple_line() << std::endl;
 }
 
-void Game_Manager::run_game() {
+std::string Game_Manager::run_game() {
 	int player_index = -1;
 	int turno = 1;
 	while(true) {
 
 		//	Controllo fine partita per numero turni (come da richiesta prof nel forum)
-		if (turno == 21) {
+		if (turno == max_turn + 1) {
 
 			// Stampa i vincitori
-			print_balance_winning();
 
 			// exit program
-			return;
+			return print_balance_winning();
 		}
 
 		// controllo fine partita per numero giocatori
@@ -118,7 +118,7 @@ void Game_Manager::run_game() {
 			osf << "Giocatore " << potential_winner->get_name() << " ha vinto la partita" << std::endl;
 
 			// exit program
-			return;
+			return potential_winner->get_name();
 		}
 
 		// selezionare prossimo gicatore
@@ -228,7 +228,7 @@ void Game_Manager::run_game() {
 	}
 }
 
-void Game_Manager::print_balance_winning() {
+std::string Game_Manager::print_balance_winning() {
 	// cerca quale è il numero più alto di fiorini
 	int max_balance = 0;
 	for (const auto & player : players) {
@@ -252,6 +252,8 @@ void Game_Manager::print_balance_winning() {
 	} else {
 		osf << " hanno vinto la partita" << std::endl;
 	}
+
+	return player_vector_to_string(winners);
 }
 
 void Game_Manager::print_player_info() {
@@ -332,6 +334,7 @@ void Game_Manager::overnight_payment_manager(Player &current_player, Space &arri
 	} else {
 
 		// Bancarotta, Giocatore eliminato
+		std::cout << "Giocatore " << current_player.get_name() << " non non possiede almeno " << arrival_space.get_overnight_stay_price() << " per pagare." << std::endl;
 		osf << "Giocatore " << current_player.get_name() << " è stato eliminato." << std::endl;
 		current_player.bankrupt();
 
