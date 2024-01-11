@@ -41,6 +41,7 @@ private:
 	void upgrade_space_manager(Player& current_player, Space& arrival_space);
 	void overnight_payment_manager(Player& current_player, Space& arrival_space);
 	void print_player_turn_end(Player& current_player);
+	bool are_all_dice_unique();
 };
 
 // comparison function object per riordinare i giocatori in base al valore del tiro dei dadi

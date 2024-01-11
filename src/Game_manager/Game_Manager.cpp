@@ -3,6 +3,7 @@
 #include <vector>
 #include <random>
 #include <algorithm>
+#include <unordered_set>
 #include "Player/Human_Player.h"
 #include "Player/Computer_Player.h"
 #include "Player/Bank.h"
@@ -50,31 +51,36 @@ void Game_Manager::setup() {
 
 	std::cout << std::endl;
 
-	for (int i = 0; i < players.size(); ++i) {
+    while(!are_all_dice_unique()) {
 
-		int j = i + 1;
-		int equal_rolls = 0;
-		while (j < players.size() && players.at(i)->get_dice_roll() == players.at(j)->get_dice_roll()) {
-			osf << "Giocatore " + players.at(i)->get_name() + " ha ottenuto lo stesso valore di Giocatore " << players.at(j)->get_name() << std::endl;
-			++equal_rolls;
-			++j;
-		}
+        for (int i = 0; i < players.size(); ++i) {
 
-		if (equal_rolls == 0) {
-			continue;
-		}
+            int j = i + 1;
+            int equal_rolls = 0;
+            while (j < players.size() && players.at(i)->get_dice_roll() == players.at(j)->get_dice_roll()) {
+                osf << "Giocatore " + players.at(i)->get_name() + " ha ottenuto lo stesso valore di Giocatore "
+                    << players.at(j)->get_name() << std::endl;
+                ++equal_rolls;
+                ++j;
+            }
 
-		for (j = i; j <= i + equal_rolls; ++j) {
-			players.at(j)->roll_dices(rand_dice, gen);
-			osf << "Giocatore " + players.at(j)->get_name() + " ha ritirato i dadi ottenendo un valore di " << players.at(j)->get_dice_roll() << std::endl;
-			sleep(1);
-		}
+            if (equal_rolls == 0) {
+                continue;
+            }
 
-		std::sort(players.begin(), players.end(), greaterRoll);
-		std::cout << std::endl;
+            for (j = i; j <= i + equal_rolls; ++j) {
+                players.at(j)->roll_dices(rand_dice, gen);
+                osf << "Giocatore " + players.at(j)->get_name() + " ha ritirato i dadi ottenendo un valore di "
+                    << players.at(j)->get_dice_roll() << std::endl;
+                sleep(1);
+            }
 
-		--i;
-	}
+            std::sort(players.begin(), players.end(), greaterRoll);
+            std::cout << std::endl;
+
+			break;
+        }
+    }
 
 	std::cout << BLUE << "Ordine finale:" << RESET << std::endl;
 	for (auto& p : players) {
@@ -363,6 +369,24 @@ std::string print_simple_line(int length) {
 
 bool greaterRoll(const std::unique_ptr<Player>& a, const std::unique_ptr<Player>& b) {
 	return a->get_dice_roll() > b->get_dice_roll();
+}
+
+bool Game_Manager::are_all_dice_unique() {
+    std::unordered_set<int> unique_dice_roll;
+
+    for (auto& p : players) {
+        // inserisce il valore nel set
+        auto result = unique_dice_roll.insert(p->get_dice_roll());
+
+        // verifica se l'inserimento è avvenuto con successo (il valore era unico)
+        if (!result.second) {
+            // Valore duplicato trovato
+            return false;
+        }
+    }
+
+    // tutti i valori dei tiri di dadi sono unici
+    return true;
 }
 
 
