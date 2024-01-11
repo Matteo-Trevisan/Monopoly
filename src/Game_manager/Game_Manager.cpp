@@ -50,7 +50,7 @@ void Game_Manager::setup() {
 
 	std::cout << std::endl;
 
-    while(!are_all_dice_unique(players)) {
+    while(!are_all_dice_unique()) {
 
         for (int i = 0; i < players.size(); ++i) {
 
@@ -77,7 +77,7 @@ void Game_Manager::setup() {
             std::sort(players.begin(), players.end(), greaterRoll);
             std::cout << std::endl;
 
-            --i;
+			break;
         }
     }
 
@@ -370,7 +370,7 @@ bool greaterRoll(const std::unique_ptr<Player>& a, const std::unique_ptr<Player>
 	return a->get_dice_roll() > b->get_dice_roll();
 }
 
-bool are_all_dice_unique(const std::vector<std::unique_ptr<Player>>& players) {
+bool Game_Manager::are_all_dice_unique() {
     std::unordered_set<int> unique_dice_roll;
 
     for (auto& p : players) {
