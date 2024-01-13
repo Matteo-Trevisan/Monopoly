@@ -272,7 +272,8 @@ void Game_Manager::print_player_info() {
 
 	std::cout << "Press ENTER to continue...";
 	std::cin.ignore();
-	std::cin.get();
+	while (std::cin.get()!='\n');
+	std::cout << std::endl;
 }
 
 void Game_Manager::buy_space_manager(Player& current_player, Space& arrival_space) {
