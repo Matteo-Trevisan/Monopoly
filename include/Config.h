@@ -10,6 +10,7 @@ struct Config
     Space_Data Luxury_Space;
     int initial_balance;
 	int pass_start_space;
+	int max_turn;
 };
 
 #endif //CONFIG_H

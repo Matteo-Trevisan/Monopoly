@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 	Config config = {{6,3,3,2,4, 'E'},
 					 {10,5,5,4,8, 'S'},
 					 {20,10,10,7,14, 'L'},
-					 100, 20};
+					 100, 20, 30};
 
 	Game_Manager gm(pt, config, "log_file.txt");
 	gm.setup();
