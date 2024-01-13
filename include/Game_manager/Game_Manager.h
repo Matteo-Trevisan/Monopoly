@@ -21,8 +21,6 @@ public:
 	void setup();
 	void run_game();
 
-	const Gameboard& get_gameboard() const;
-
 private:
 	OstreamFork osf;
 	std::ofstream log_file;

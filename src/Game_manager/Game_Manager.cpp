@@ -11,10 +11,6 @@
 #include "OstreamFork.h"
 #include "unistd.h"		// For sleep function
 
-const Gameboard& Game_Manager::get_gameboard() const {
-	return gameboard;
-}
-
 Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& filename) : gen(rd()) {
 	players.reserve(4);
 	if (p) {
