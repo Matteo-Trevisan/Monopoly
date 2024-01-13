@@ -61,10 +61,6 @@ int Space::get_start_pass_money() const {
 	return 0;
 }
 
-void Space::set_start_pass_money(int startPassMoney) {
-
-}
-
 std::string Space::get_name() const {
 	return name;
 }
