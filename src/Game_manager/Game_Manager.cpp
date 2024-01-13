@@ -31,6 +31,7 @@ Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& file
 	rand_dice = std::uniform_int_distribution<>(1, 6);
 	log_file = std::ofstream( filename) ;
 	osf = OstreamFork( &log_file , &std::cout ) ;
+	max_turn = config.max_turn;
 }
 
 void Game_Manager::setup() {
@@ -95,7 +96,7 @@ void Game_Manager::run_game() {
 	while(true) {
 
 		//	Controllo fine partita per numero turni (come da richiesta prof nel forum)
-		if (turno == 21) {
+		if (turno == max_turn + 1) {
 
 			// Stampa i vincitori
 			print_balance_winning();

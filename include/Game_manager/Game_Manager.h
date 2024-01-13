@@ -26,6 +26,7 @@ public:
 private:
 	OstreamFork osf;
 	std::ofstream log_file;
+	int max_turn;
 
 	Gameboard gameboard;
 	std::vector<std::unique_ptr<Player>> players;
