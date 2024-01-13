@@ -207,8 +207,10 @@ void Game_Manager::run_game() {
 		// Se la cella di arrivo è del giocatore offre di fare upgrade della cella
 		// se le condizioni sono favorevoli (cella upgradable e abbastanza soldi)
 		//
-		if (arrival_space.get_owner() == &current_player && arrival_space.upgradable()) {
-			upgrade_space_manager(current_player,arrival_space);
+		if (arrival_space.get_owner() == &current_player) {
+			if (arrival_space.upgradable()) {
+				upgrade_space_manager(current_player,arrival_space);
+			}
 			print_player_turn_end(current_player);
 			continue;
 		}
@@ -216,8 +218,10 @@ void Game_Manager::run_game() {
 		//
 		// Se la cella non è del giocatore allora paga il pernottamento
 		//
-		if (arrival_space.get_owner() != &current_player && arrival_space.get_current_building() != Building::empty) {
-			overnight_payment_manager(current_player, arrival_space);
+		if (arrival_space.get_owner() != &current_player) {
+			if (arrival_space.get_current_building() != Building::empty) {
+				overnight_payment_manager(current_player, arrival_space);
+			}
 			print_player_turn_end(current_player);
 			continue;
 		}
