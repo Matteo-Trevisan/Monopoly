@@ -56,7 +56,7 @@ std::string Player::get_name() const {
 	return name;
 }
 
-bool Player::offer(const std::string& offer) const {
+int Player::offer(const std::string& offer) const {
 	return false;
 }
 

@@ -273,32 +273,44 @@ void Game_Manager::print_player_info() {
 
 	std::cout << "Press ENTER to continue...";
 	std::cin.ignore();
-	std::cin.get();
+	while (std::cin.get()!='\n');
+	std::cout << std::endl;
 }
 
 void Game_Manager::buy_space_manager(Player& current_player, Space& arrival_space) {
 	if(current_player.has_enough_money(arrival_space.get_terrain_sale_price())) {
 
-		// propone l'offerta
-		bool offer = current_player.offer(
-				"Giocatore " + current_player.get_name() + ", vuoi acquistare la proprietà " +
-				arrival_space.get_name() + " a " + std::to_string(arrival_space.get_terrain_sale_price()) +
-				" fiorini?");
-		if (offer) {
+		while (true) {
 
-			// paga il terreno
-			current_player.pay(arrival_space.get_terrain_sale_price());
+			// propone l'offerta
+			// 0: rifiutata, 1: accettata, 2: visualizza tabellone
+			int offer = current_player.offer(
+					"Giocatore " + current_player.get_name() + ", vuoi acquistare la proprietà " +
+					arrival_space.get_name() + " a " + std::to_string(arrival_space.get_terrain_sale_price()) +
+					" fiorini?");
 
-			// imposta il proprietario sulla casella
-			arrival_space.set_owner(&current_player);
+			// rifiutata
+			if (offer == 0){
+				std::cout << "Giocatore " << current_player.get_name() << " ha rifiutato l'offerta." << std::endl;
+				break;
+			}
+			else if (offer == 1) {
 
-			// aggiunge la proprietà alla lista per comodità di stampa
-			current_player.add_property(arrival_space.get_name());
+				// paga il terreno
+				current_player.pay(arrival_space.get_terrain_sale_price());
 
-			// stampa l'acquisto
-			osf << "Giocatore " << current_player.get_name() << " ha acquistato il terreno " << arrival_space.get_name() << std::endl;
-		} else {
-			std::cout << "Giocatore " << current_player.get_name() << " ha rifiutato l'offerta." << std::endl;
+				// imposta il proprietario sulla casella
+				arrival_space.set_owner(&current_player);
+
+				// aggiunge la proprietà alla lista per comodità di stampa
+				current_player.add_property(arrival_space.get_name());
+
+				// stampa l'acquisto
+				osf << "Giocatore " << current_player.get_name() << " ha acquistato il terreno " << arrival_space.get_name() << std::endl;
+				break;
+			} else if (offer == 2) {
+				print_player_info();
+			}
 		}
 	} else {
 		std::cout << "Giocatore " << current_player.get_name() << " non ha abbastanza fiorini per comprare il terreno." << std::endl;
@@ -307,17 +319,23 @@ void Game_Manager::buy_space_manager(Player& current_player, Space& arrival_spac
 
 void Game_Manager::upgrade_space_manager(Player &current_player, Space &arrival_space) {
 	if (current_player.has_enough_money(arrival_space.get_next_upgrade_price())) {
-		bool offer = current_player.offer("Vuoi migliorare la proprietà " + arrival_space.get_name() + ", costruendo una " + arrival_space.get_next_building_name() + ", al costo di " + std::to_string(arrival_space.get_next_upgrade_price()) + " fiorini?");
-		if (offer) {
-			current_player.pay(arrival_space.get_terrain_sale_price());
-			arrival_space.upgrade();
-			if (arrival_space.get_current_building() == Building::house) {
-				osf << "Giocatore " << current_player.get_name() << " ha costruito una casa sul terreno " << arrival_space.get_name() << std::endl;
-			} else if (arrival_space.get_current_building() == Building::hotel){
-				osf << "Giocatore " << current_player.get_name() << " ha migliorato una casa in albergo sul terreno " << arrival_space.get_name() << std::endl;
+		while (true) {
+			int offer = current_player.offer("Vuoi migliorare la proprietà " + arrival_space.get_name() + ", costruendo una " + arrival_space.get_next_building_name() + ", al costo di " + std::to_string(arrival_space.get_next_upgrade_price()) + " fiorini?");
+			if (offer == 1) {
+				current_player.pay(arrival_space.get_terrain_sale_price());
+				arrival_space.upgrade();
+				if (arrival_space.get_current_building() == Building::house) {
+					osf << "Giocatore " << current_player.get_name() << " ha costruito una casa sul terreno " << arrival_space.get_name() << std::endl;
+				} else if (arrival_space.get_current_building() == Building::hotel){
+					osf << "Giocatore " << current_player.get_name() << " ha migliorato una casa in albergo sul terreno " << arrival_space.get_name() << std::endl;
+				}
+				break;
+			} else if (offer == 0) {
+				std::cout << "Giocatore " << current_player.get_name() << " ha rifiutato l'offerta." << std::endl;
+				break;
+			} else if (offer == 2) {
+				print_player_info();
 			}
-		} else {
-			std::cout << "Giocatore " << current_player.get_name() << " ha rifiutato l'offerta." << std::endl;
 		}
 	} else {
 		std::cout << "Giocatore " << current_player.get_name() << " non ha abbastanza fiorini per migliorare la casella." << std::endl;

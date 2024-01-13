@@ -4,7 +4,7 @@
 #include <string>
 #include <algorithm>
 
-bool Human_Player::offer(const std::string& offer) const {
+int Human_Player::offer(const std::string& offer) const {
 	std::cout << offer << " [S/N]: ";
 	while (true) {
 		std::string response;
@@ -14,13 +14,15 @@ bool Human_Player::offer(const std::string& offer) const {
 			return true;
 		} else if (response == "N") {
 			return false;
+		} else if (response == "SHOW") {
+			return 2;
 		}
 		std::cout << "Invalid response [S/N]: ";
 	}
 }
 
 bool Human_Player::print_offer() {
-	std::cout << "Digitare [S]  per visualizzare (show) il tabellone, \n[N] per continuare senza visualizzarlo: ";
+	std::cout << "Digitare [S/SHOW] per visualizzare  il tabellone, [N] per continuare senza visualizzarlo: ";
 	while (true) {
 		std::string response;
 		std::cin >> response;
