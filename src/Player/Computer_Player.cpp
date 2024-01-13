@@ -3,7 +3,7 @@
 #include <iostream>
 #include <random>
 
-bool Computer_Player::offer(const std::string& offer) const {
+int Computer_Player::offer(const std::string& offer) const {
 	std::cout << offer << " [S/N]: ";
 
 	std::random_device rd;

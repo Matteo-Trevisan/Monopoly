@@ -26,7 +26,7 @@ public:
 	std::string get_name() const;
 	void bankrupt();
 	int get_balance() const;
-	virtual bool offer(const std::string& offer) const;
+	virtual int offer(const std::string& offer) const;
 
 	virtual bool print_offer();
 
