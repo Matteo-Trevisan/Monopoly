@@ -19,12 +19,12 @@ Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& file
 	if (p) {
 		players.emplace_back(new Human_Player(config.initial_balance, "1"));
 	} else {
-		players.emplace_back(new Computer_Player(config.initial_balance, "1", config.cumputer_accept_percentage));
+		players.emplace_back(new Computer_Player(config.initial_balance, "1", config.computer_accept_percentage));
 	}
 
 	// Crea gli altri 3 giocatori computer
 	for (int i = 0; i < 3; ++i) {
-		players.emplace_back(new Computer_Player(config.initial_balance, std::to_string(i+2), config.cumputer_accept_percentage));
+		players.emplace_back(new Computer_Player(config.initial_balance, std::to_string(i+2), config.computer_accept_percentage));
 	}
 
 	// Inizializza le altre variabili membro
