@@ -11,12 +11,13 @@
 
 class Computer_Player : public Player{
 public:
-	explicit Computer_Player(int initial_balance, const std::string& name) :
-			Computer_Player::Player(initial_balance, name){};
+	explicit Computer_Player(int initial_balance, const std::string& name, int accept_percentage) :
+			Computer_Player::Player(initial_balance, name), accept_percentage(accept_percentage){};
 	~Computer_Player() override;
 	int offer(const std::string& offer) const override;
 
 private:
+	int accept_percentage;
 };
 
 

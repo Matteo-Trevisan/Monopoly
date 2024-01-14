@@ -1,3 +1,6 @@
+//
+//	AUTORE: Matteo Trevisan
+//
 
 #ifndef OSTREAMFORK_H
 #define OSTREAMFORK_H
@@ -6,6 +9,7 @@
 #include <fstream>
 #include <string>
 
+//	Classe per la gestione di stream doppio: std::cout e verso file
 class OstreamFork {
 public:
 	std::ostream *os1;
@@ -16,7 +20,7 @@ private:
 
 };
 
-// For manipulators: endl, flush
+// Overloading operator<< per gestione di manipolatori: endl, flush, ...
 OstreamFork &operator<<(OstreamFork &osf, std::ostream &(*f)(std::ostream &));
 
 #include "Game_manager/OstreamFork.hpp"
