@@ -1,6 +1,9 @@
 
 #include "Space/Space.h"
 
+//Essendo Space una "classe base", la maggior parte dei metodi in questa classe sono virtuali e verranno
+//quindi sovrascritti nelle relative classi derivate
+
 //Costruttore della classe Space
 Space::Space(const std::string& name, Player* owner) : name(name), owner(owner) {}
 
@@ -48,12 +51,11 @@ bool Space::upgradable() {
 }
 
 //Metodo che effettua l'upgrade dell'edificio, se presente. Altrimenti viene costruita una casa
-//Essendo un metodo virtuale, verrà sovrascritto nell classe Normal_Space.cpp
 void Space::upgrade() {
 
 }
 
-//Metodo che effettua il reset delle proprietà della casella. Essendo un metodo virtuale, verrà sovrascritto nell classe Normal_Space.cpp
+//Metodo che effettua il reset delle proprietà della casella
 void Space::reset() {
 
 }
