@@ -25,7 +25,7 @@ cui sono state apportate alcune modifiche o semplificazioni per la sua realizzaz
 Al fine di evitare che la partita si prolunghi per un periodo di tempo eccessivamente lungo, la partita può anche terminare 
 al raggiungimento di un determinato numero di turni prefissato.
 
-Il programma genera un file di log (log_file.txt) nella stessa cartella in cui viene eseguito.
+Il programma genera un file di log (log_file.txt) nella stessa cartella da cui viene eseguito.
 
 ## Screenshot
 

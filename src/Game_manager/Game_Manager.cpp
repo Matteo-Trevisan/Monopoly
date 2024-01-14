@@ -154,7 +154,7 @@ void Game_Manager::run_game() {
 
 
 		// delay di 1 secondo
-		sleep(0);	// TODO rimettere a 1 prima di consegnare
+		sleep(1);
 
 		// Stampa linea divisoria + attuale giocatore
 		std::cout << "\n" << print_simple_line(19) << " Giocatore " << current_player.get_name() << " " <<  print_simple_line(19) << std::endl;
