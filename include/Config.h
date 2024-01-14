@@ -19,6 +19,7 @@ struct Config
     int initial_balance;
 	int pass_start_space;
 	int max_turn;
+	int cumputer_accept_percentage;
 };
 
 #endif //CONFIG_H
