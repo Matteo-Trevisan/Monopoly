@@ -1,3 +1,6 @@
+//
+//	AUTORE: Elia Tolfo
+//
 
 #include "Player/Bank.h"
 #include <string>
