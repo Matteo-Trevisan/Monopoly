@@ -79,7 +79,7 @@ void Game_Manager::setup() {
                 players.at(j)->roll_dices(rand_dice, gen);
                 osf << "Giocatore " + players.at(j)->get_name() + " ha ritirato i dadi ottenendo un valore di "
                     << players.at(j)->get_dice_roll() << std::endl;
-                sleep(1);
+                sleep(0);
             }
 
             std::sort(players.begin(), players.end(), greaterRoll);

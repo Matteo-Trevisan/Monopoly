@@ -32,10 +32,10 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Struct di configurazione
-	Config config = {{6,3,3,2,4, 'E'},
-					 {10,5,5,4,8, 'S'},
-					 {20,10,10,7,14, 'L'},
-					 100, 20, 30, 25};
+	Config config = {{90,60,60,40,135, 'E'},
+					 {190,100,100,75,175, 'S'},
+					 {340,150,150,100,250, 'L'},
+					 1500, 100, 100, 25};
 
 	std::unordered_map<std::string, int> statistic;
 
