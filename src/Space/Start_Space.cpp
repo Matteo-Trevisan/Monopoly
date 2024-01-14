@@ -1,3 +1,6 @@
+//
+//	AUTORE: Andrea Sacchetto
+//
 
 #include "Space/Start_Space.h"
 
