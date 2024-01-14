@@ -31,7 +31,15 @@ già in possesso, o edificarci sopra una casa o un hotel nel caso il giocatore s
 - L'acquisto e l'edificazione di un terreno fanno in modo che se nei turni successivi un giocatore diverso dal 
 proprietario "cada" su quella casella, si troverà obbligato a pagare al proprietario una determinata somma di 
 fiorini, la quale verrà identificata in base alle diverse tipologie di terreni.
-
+- Con l'andamento del gioco ogni giocatore si arricchirà territorialmente sempre di più, in base alla propria strategia 
+di gioco. Più i terreni saranno edificati e più gli avversari dovranno pagare se nel loro turno arriveranno su quella 
+specifica casella.
+- L'obiettivo di ogni giocatore e di fare spendere tutti i fiorini ai propri avversari, investendo in nuovi territori ma 
+al contempo restando vigili sulla propria situazione economica. 
+- La partita termina quando tutti i giocatori tranne uno avranno terminati i propri fiorini. L'unico giocatore che non 
+sarà andato in bancarotta è il vincitore della partita.
+Al fine di evitare che la partita si prolunghi per un periodo di tempo eccessivamente lungo, la partita può anche terminare 
+al raggiungimento di un determinato numero di turni prefissato.
 
 ## Screenshot
 
