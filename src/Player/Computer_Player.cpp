@@ -1,8 +1,10 @@
+//
+//	AUTORE: Elia Tolfo
+//
 
 #include "Player/Computer_Player.h"
 #include <iostream>
 #include <random>
-
 
 // funzione gestione richiesta risposta per un'offerta
 int Computer_Player::offer(const std::string& offer) const {

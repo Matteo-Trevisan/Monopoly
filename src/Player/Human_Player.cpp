@@ -1,3 +1,6 @@
+//
+//	AUTORE: Elia Tolfo
+//
 
 #include "Player/Human_Player.h"
 #include <iostream>
