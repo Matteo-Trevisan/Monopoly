@@ -3,6 +3,7 @@
 #include "Space.h"
 #include <string>
 
+//Distruttore di default
 Normal_Space::~Normal_Space() = default;
 
 //Restituisce il costo del terreno
@@ -30,7 +31,7 @@ int Normal_Space::get_hotel_overnight_stay_price() const {
 	return data.hotel_overnight_stay;
 }
 
-//######################################################################
+//Effettua l'upgrade della tipologia di edificio presente sulla casella. Se empty costruisce una casa
 void Normal_Space::upgrade() {
 	switch (building) {
 		case empty:
@@ -82,12 +83,12 @@ bool Normal_Space::upgradable() {
 	return owner != nullptr && building != Building::hotel;
 }
 
-//######################################################################################
+//Restituisce il carattere che indica la tipologia di terreno
 char Normal_Space::get_type_char() const {
     return data.type;
 }
 
-//######################################################################################
+//Restituisce un carattere per indicare la tipologia di edificio presente sulla casella
 std::string Normal_Space::get_current_building_char() const {
 	switch (building) {
 		case house:
