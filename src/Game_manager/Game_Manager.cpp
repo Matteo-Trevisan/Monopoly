@@ -12,6 +12,8 @@
 #include "unistd.h"		// For sleep function
 
 Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& filename) : gen(rd()) {
+
+	// Crea il primo player del tipo richiesto (Computer o Human)
 	players.reserve(4);
 	if (p) {
 		players.emplace_back(new Human_Player(config.initial_balance, "1"));
@@ -19,9 +21,12 @@ Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& file
 		players.emplace_back(new Computer_Player(config.initial_balance, "1"));
 	}
 
+	// Crea gli altri 3 giocatori computer
 	for (int i = 0; i < 3; ++i) {
 		players.emplace_back(new Computer_Player(config.initial_balance, std::to_string(i+2)));
 	}
+
+	// Inizializza le altre variabili membro
 	bank = Bank(config.initial_balance * 20, "Banca");
 	gameboard = Gameboard(config, &players, &bank);
 	rand_dice = std::uniform_int_distribution<>(1, 6);
@@ -30,6 +35,7 @@ Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& file
 	max_turn = config.max_turn;
 }
 
+// Funzione iniziale per tirare i dadi e decidere l'ordine dei giocatori
 void Game_Manager::setup() {
 
 	std::cout << RED << std::setw(30) << "MONOPOLY" << RESET << std::endl << print_simple_line()
@@ -38,16 +44,19 @@ void Game_Manager::setup() {
 	std::cout << RESET;
 	osf << std::endl;
 
+	// Fa tirare i dadi a ogni giocatore
 	for (auto& p : players) {
 		p->roll_dices(rand_dice, gen);
 		osf << "Giocatore " + p->get_name() + " ha tirato i dadi ottenendo un valore di " << p->get_dice_roll() << std::endl;
 		sleep(1);
 	}
 
+	// Ordina il vector di giocatori in base al tiro di dadi
 	std::sort(players.begin(), players.end(), greaterRoll);
 
 	std::cout << std::endl;
 
+	// Ciclo per controllare che i valori dei tiri siano tutti diversi
     while(!are_all_dice_unique()) {
 
         for (int i = 0; i < players.size(); ++i) {
@@ -86,7 +95,13 @@ void Game_Manager::setup() {
 	osf << std::endl << print_simple_line() << std::endl;
 }
 
+
+// Funzione pubblica principale per far partire l'esecuzione del gioco
 void Game_Manager::run_game() {
+
+	// Chiamata a setup per ordinare i giocatori
+	setup();
+
 	int player_index = -1;
 	int turno = 1;
 	while(true) {
@@ -110,6 +125,7 @@ void Game_Manager::run_game() {
 				potential_winner = player.get();
 			}
 		}
+		// Se è rimasto solo 1 giocatore in gioco
 		if (giocatori_in_gioco == 1) {
 			// Stampa i vincitori
 			osf << "Giocatore " << potential_winner->get_name() << " ha vinto la partita" << std::endl;
@@ -139,7 +155,7 @@ void Game_Manager::run_game() {
 		// delay di 1 secondo
 		sleep(0);	// TODO rimettere a 1 prima di consegnare
 
-		// Stampa situazione attuale del giocatore
+		// Stampa linea divisoria + attuale giocatore
 		std::cout << "\n" << print_simple_line(19) << " Giocatore " << current_player.get_name() << " " <<  print_simple_line(19) << std::endl;
 
 		// Salta giocatore eliminato
@@ -166,7 +182,7 @@ void Game_Manager::run_game() {
 		// Sposta il giocatore
 		current_player.set_position((current_player.get_position() + current_player.get_dice_roll()) % 28);
 
-		// Ottiene una reference alla casella di arrivo del giocatore
+		// Ottiene una reference alla casella di arrivo del giocatore per comodità d'uso
 		Space& arrival_space = *gameboard.get_space_at(current_player.get_position());
 
 		// Stampa posizione di arrivo del giocatore
@@ -246,6 +262,7 @@ void Game_Manager::print_balance_winning() {
 			if(player->get_balance() == max_balance) winners.push_back(player.get());
 	}
 
+	// Stampa i giocatori vincenti
 	std::cout << "\n" << print_simple_line() << "\n";
 	osf << std::endl << player_vector_to_string(winners);
 	if(winners.size() == 1) {
@@ -262,22 +279,24 @@ void Game_Manager::print_player_info() {
 	// stampa lista proprietà per giocatore
 	std::cout << "PROPRIETA'" << std::endl;
 	for (const auto & p : players) {
-		std::cout << "Giocatore " << p->get_name() << ": " << p->get_properties() << std::endl;
+		std::cout << "Giocatore " << p->get_name() << ": " << p->get_properties() << "\n";
 	}
 
 	// stampa lista fiorini per giocatore
 	std::cout << std::endl << "SALDO" << std::endl;
 	for (const auto & p : players) {
-		std::cout << "Giocatore " << p->get_name() << ": " << p->get_balance() << " fiorini" << std::endl;
+		std::cout << "Giocatore " << p->get_name() << ": " << p->get_balance() << " fiorini" << "\n";
 	}
 
-	std::cout << "Press ENTER to continue...";
+	// Implementazione di premere invio per continuare
+	std::cout << "\nPremere INVIO per continuare...";
 	std::cin.ignore();
 	while (std::cin.get()!='\n');
 	std::cout << std::endl;
 }
 
 void Game_Manager::buy_space_manager(Player& current_player, Space& arrival_space) {
+	// Controllo che il giocatore abbia abbastanza soldi per comprare il terreno
 	if(current_player.has_enough_money(arrival_space.get_terrain_sale_price())) {
 
 		while (true) {
@@ -289,12 +308,10 @@ void Game_Manager::buy_space_manager(Player& current_player, Space& arrival_spac
 					arrival_space.get_name() + " a " + std::to_string(arrival_space.get_terrain_sale_price()) +
 					" fiorini?");
 
-			// rifiutata
-			if (offer == 0){
+			if (offer == 0){	// offerta rifiutata
 				std::cout << "Giocatore " << current_player.get_name() << " ha rifiutato l'offerta." << std::endl;
 				break;
-			}
-			else if (offer == 1) {
+			} else if (offer == 1) {	// offerta accettata
 
 				// paga il terreno
 				current_player.pay(arrival_space.get_terrain_sale_price());
@@ -308,7 +325,7 @@ void Game_Manager::buy_space_manager(Player& current_player, Space& arrival_spac
 				// stampa l'acquisto
 				osf << "Giocatore " << current_player.get_name() << " ha acquistato il terreno " << arrival_space.get_name() << std::endl;
 				break;
-			} else if (offer == 2) {
+			} else if (offer == 2) {	// Visualizza tabellone
 				print_player_info();
 			}
 		}
@@ -318,22 +335,31 @@ void Game_Manager::buy_space_manager(Player& current_player, Space& arrival_spac
 }
 
 void Game_Manager::upgrade_space_manager(Player &current_player, Space &arrival_space) {
+	// Controllo che il giocatore abbia abbastanza soldi per migliorare il terreno
 	if (current_player.has_enough_money(arrival_space.get_next_upgrade_price())) {
 		while (true) {
+			// propone l'offerta
+			// 0: rifiutata, 1: accettata, 2: visualizza tabellone
 			int offer = current_player.offer("Vuoi migliorare la proprietà " + arrival_space.get_name() + ", costruendo una " + arrival_space.get_next_building_name() + ", al costo di " + std::to_string(arrival_space.get_next_upgrade_price()) + " fiorini?");
-			if (offer == 1) {
-				current_player.pay(arrival_space.get_terrain_sale_price());
+
+			if (offer == 1) {	// offerta accettata
+				// Paga il miglioramento
+				current_player.pay(arrival_space.get_next_upgrade_price());
+
+				// Migliora la casella
 				arrival_space.upgrade();
+
+				// Stampa a terminale e sul file
 				if (arrival_space.get_current_building() == Building::house) {
 					osf << "Giocatore " << current_player.get_name() << " ha costruito una casa sul terreno " << arrival_space.get_name() << std::endl;
 				} else if (arrival_space.get_current_building() == Building::hotel){
 					osf << "Giocatore " << current_player.get_name() << " ha migliorato una casa in albergo sul terreno " << arrival_space.get_name() << std::endl;
 				}
 				break;
-			} else if (offer == 0) {
+			} else if (offer == 0) {	// Offerta rifiutata
 				std::cout << "Giocatore " << current_player.get_name() << " ha rifiutato l'offerta." << std::endl;
 				break;
-			} else if (offer == 2) {
+			} else if (offer == 2) {	// Visualizza tabellone
 				print_player_info();
 			}
 		}
@@ -343,6 +369,11 @@ void Game_Manager::upgrade_space_manager(Player &current_player, Space &arrival_
 }
 
 void Game_Manager::overnight_payment_manager(Player &current_player, Space &arrival_space) {
+	//
+	// Prova a pagare chiamando la funzione pay():
+	// in caso positivo paga
+	// altrimenti viene pagato tutto il capitale disponibile e dichiarata la bancarotta
+	//
 	if (current_player.pay(*arrival_space.get_owner(), arrival_space.get_overnight_stay_price())) {
 
 		// Giocatore X paga Giocatore Y
@@ -363,11 +394,12 @@ void Game_Manager::overnight_payment_manager(Player &current_player, Space &arri
 	}
 }
 
+// Funzione per stampare la fine del turno del giocatore
 void Game_Manager::print_player_turn_end(Player &current_player) {
 	osf << "Giocatore " << current_player.get_name() <<" ha finito il turno" << std::endl;
 }
 
-
+// Funzione per stampare la lista di giocatori vincitori
 std::string player_vector_to_string(const std::vector<Player*> &vec) {
 	std::string ret;
     if (!vec.empty()) {
@@ -386,10 +418,12 @@ std::string print_simple_line(int length) {
 	return std::string(length, '-');
 }
 
+// Funzione che verrà usata come predicato per confrontare i giocatori in base al lancio dei dadi
 bool greaterRoll(const std::unique_ptr<Player>& a, const std::unique_ptr<Player>& b) {
 	return a->get_dice_roll() > b->get_dice_roll();
 }
 
+// FUnzione che controlla se tutti i lanci sono diversi per l'ordinamento
 bool Game_Manager::are_all_dice_unique() {
     std::unordered_set<int> unique_dice_roll;
 
