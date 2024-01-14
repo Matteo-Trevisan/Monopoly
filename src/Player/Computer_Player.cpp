@@ -16,7 +16,7 @@ int Computer_Player::offer(const std::string& offer) const {
 	std::uniform_int_distribution<> rand_choice(1, 100);
 
     // utilizzo del numero generato per l'attuazione dell'azione nel 25% dei casi
-	if (rand_choice(gen) <= 25) {
+	if (rand_choice(gen) <= accept_percentage) {
 		std::cout << "S" << std::endl;
 		return true;
 	} else {
