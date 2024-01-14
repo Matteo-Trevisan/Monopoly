@@ -1,3 +1,6 @@
+//
+//	AUTORE: Matteo Trevisan
+//
 
 #include "Game_Manager.h"
 #include <vector>
