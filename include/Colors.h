@@ -1,3 +1,8 @@
+//
+//	AUTORE: Andrea Sacchetto
+//
+
+//Codice necessario per l'utilizzo di diversi colori nella visualizzazione grafica durante l'esecuzione
 
 #ifndef COLORS_H
 #define COLORS_H

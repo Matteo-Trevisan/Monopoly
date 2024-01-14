@@ -1,3 +1,6 @@
+//
+//	AUTORE: Andrea Sacchetto
+//
 
 #ifndef NORMAL_SPACE_H
 #define NORMAL_SPACE_H

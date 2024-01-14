@@ -1,3 +1,6 @@
+//
+//	AUTORE: Andrea Sacchetto
+//
 
 #include "Space/Normal_Space.h"
 #include "Space.h"
