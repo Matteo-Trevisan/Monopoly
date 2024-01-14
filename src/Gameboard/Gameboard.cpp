@@ -1,3 +1,6 @@
+//
+//	AUTORE: Matteo Trevisan
+//
 
 #include "Gameboard/Gameboard.h"
 #include <random>
@@ -14,6 +17,7 @@
 #include "Colors.h"
 
 Gameboard::Gameboard(Config config, std::vector<std::unique_ptr<Player>>* players, Bank* bank) : players(players) {
+	// Crea 24 spazi per le caselle
     space_deck.reserve(24);
 	space_deck.emplace_back(new Start_Space(config.pass_start_space, bank));
     for(int i = 0; i < 8; i++) {
@@ -54,22 +58,28 @@ Gameboard::Gameboard(Config config, std::vector<std::unique_ptr<Player>>* player
 	}
 }
 
+// Funzione per avere la caselle i-esima const
 const std::unique_ptr<Space>& Gameboard::get_space_at(int i) const {
 	return space_deck.at(i);
 }
 
+// Funzione per avere la caselle i-esima
 std::unique_ptr<Space>& Gameboard::get_space_at(int i) {
 	return space_deck.at(i);
 }
 
+// Ritorna puntatore al vettore di players const
 std::vector<std::unique_ptr<Player>>* Gameboard::get_players() const {
 	return players;
 }
 
+// Ritorna puntatore al vettore di players
 std::vector<std::unique_ptr<Space>> &Gameboard::get_space_deck() {
 	return space_deck;
 }
 
+// Ritorna una stringa da usare per stampare le caselle
+// (la stringa contiene il carattere del tipo di building e un numero rappresentante il giocatore, se c'è)
 std::string get_space_info(int i, const Gameboard &g) {
 	std::string ret;
 	const std::unique_ptr<Space>& uptr = g.get_space_at(i);
@@ -85,6 +95,7 @@ std::string get_space_info(int i, const Gameboard &g) {
 	return ret;
 }
 
+// Overloading operatore<< con Print_Line per stampare una linea
 std::ostream &operator<<(std::ostream &os, const Print_Line &obj) {
 	os << obj.color << "+" << std::string(3, '-') << "+";
 	for (int i = 0; i < 8; ++i) {
@@ -106,9 +117,9 @@ std::ostream &operator<<(std::ostream &os, const Print_Line &obj) {
 	return os;
 }
 
-
+// Overloading operatore<< con Gameboard per stampare la tabella
 std::ostream &operator<<(std::ostream &os, const Gameboard &g) {
-	std::string stampa;
+	std::string stampa;		// Stringa ritornata
 	std::vector<int> player_pos;
 
 

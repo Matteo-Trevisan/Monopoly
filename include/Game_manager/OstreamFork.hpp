@@ -1,8 +1,13 @@
+//
+//	AUTORE: Matteo Trevisan
+//
+
 #ifndef OSTREAMFORK_HPP
 #define OSTREAMFORK_HPP
 
+// File .hpp in quanto ci sono delle funzioni che utilizzano template
 
-// For data: int, long , ...
+// Overloading operator<< per gestione di dati: int, long, string, ...
 template <class Data>
 OstreamFork &operator<<(OstreamFork &osf, Data d) {
 	(*osf.os1) << d;
@@ -10,7 +15,7 @@ OstreamFork &operator<<(OstreamFork &osf, Data d) {
 	return osf;
 }
 
-// For setw() , ...
+// Overloading operator<< per gestione di funzioni: setw() , ...
 template <class Data>
 OstreamFork &operator<<(OstreamFork &osf, std::ostream &(*f)(std::ostream &, Data)) {
 	(*osf.os1) << f;

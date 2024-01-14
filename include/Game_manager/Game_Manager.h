@@ -1,3 +1,6 @@
+//
+//	AUTORE: Matteo Trevisan
+//
 
 #ifndef GAME_MANAGER_H
 #define GAME_MANAGER_H
@@ -10,7 +13,7 @@
 #include "Gameboard/Gameboard.h"
 #include "OstreamFork.h"
 
-
+// Enum usato nel costruttore come parametro per identificare il tipo del primo giocatore
 enum Player_Type {
 	Computer, Human
 };
@@ -18,22 +21,22 @@ enum Player_Type {
 class Game_Manager {
 public:
 	explicit Game_Manager(Player_Type p, Config config, const std::string& filename);
-	void setup();
 	void run_game();
 
 private:
-	OstreamFork osf;
-	std::ofstream log_file;
-	int max_turn;
+	OstreamFork osf;			// Oggetto per la gestione della scrittura su file
+	std::ofstream log_file;		// Stram al file
+	int max_turn;				// numero massimo di turni
 
-	Gameboard gameboard;
-	std::vector<std::unique_ptr<Player>> players;
-	Bank bank;
+	Gameboard gameboard;		// Oggetto Gameboard
+	std::vector<std::unique_ptr<Player>> players;	// Vettore di players
+	Bank bank;					// Banca
 
-	std::random_device rd;
+	std::random_device rd;		// Variabili per la gestione del random
 	std::mt19937 gen;
 	std::uniform_int_distribution<> rand_dice;
 
+	void setup();
 	void print_balance_winning();
 	void print_player_info();
 	void buy_space_manager(Player& current_player, Space& arrival_space);
