@@ -10,6 +10,7 @@
 #include "Gameboard/Gameboard.h"
 #include "OstreamFork.h"
 #include "unistd.h"		// For sleep function
+#include "Player/Bank.h"
 
 Game_Manager::Game_Manager(Player_Type p, Config config, const std::string& filename) : gen(rd()) {
 	players.reserve(4);
