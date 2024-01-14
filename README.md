@@ -155,3 +155,6 @@ Le variabili sono:
 - **computer_accept_percentage**: definisce un numero da 0 a 100 che rappresenta la percentuale con cui i giocatori computer accetteranno un'offerta (default: 25)
 
 ![Config](Screenshots/Struttura_config.png)
+
+## Test
+Sono stati fatti dei test per rilevare memory leak utilizzando [Valgrind](https://valgrind.org/) e sono risultati tutti negativi.
