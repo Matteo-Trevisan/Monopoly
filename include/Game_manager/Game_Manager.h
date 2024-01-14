@@ -21,18 +21,16 @@ public:
 	void setup();
 	std::string run_game();
 
-	const Gameboard& get_gameboard() const;
-
 private:
-	OstreamFork osf;
-	std::ofstream log_file;
-	int max_turn;
+	OstreamFork osf;			// Oggetto per la gestione della scrittura su file
+	std::ofstream log_file;		// Stram al file
+	int max_turn;				// numero massimo di turni
 
-	Gameboard gameboard;
-	std::vector<std::unique_ptr<Player>> players;
-	Bank bank;
+	Gameboard gameboard;		// Oggetto Gameboard
+	std::vector<std::unique_ptr<Player>> players;	// Vettore di players
+	Bank bank;					// Banca
 
-	std::random_device rd;
+	std::random_device rd;		// Variabili per la gestione del random
 	std::mt19937 gen;
 	std::uniform_int_distribution<> rand_dice;
 

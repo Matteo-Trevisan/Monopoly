@@ -1,3 +1,6 @@
+//
+//	AUTORE: Andrea Sacchetto
+//
 
 #ifndef START_SPACE_H
 #define START_SPACE_H
@@ -12,7 +15,7 @@ public:
 	: Angular_Space(owner), start_pass_money(startPassMoney) {};
 	~Start_Space() override;
 	int get_start_pass_money() const override;
-	void set_start_pass_money(int startPassMoney) override;
+
 	char get_type_char() const override;
 
 private:

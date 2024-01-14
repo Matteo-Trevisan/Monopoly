@@ -1,3 +1,6 @@
+//
+//	AUTORE: Andrea Sacchetto
+//
 
 #ifndef ANGULAR_SPACE_H
 #define ANGULAR_SPACE_H

@@ -1,3 +1,6 @@
+//
+//	AUTORE: Andrea Sacchetto
+//
 
 #ifndef SPACE_H
 #define SPACE_H
@@ -29,7 +32,6 @@ public:
 	virtual void reset();
 	virtual char get_type_char() const;
 	virtual int get_start_pass_money() const;
-	virtual void set_start_pass_money(int startPassMoney);
 	Player* get_owner();
 	void set_owner(Player* p);
 

@@ -1,3 +1,6 @@
+//
+//	AUTORE: Elia Tolfo
+//
 
 #ifndef BANK_H
 #define BANK_H

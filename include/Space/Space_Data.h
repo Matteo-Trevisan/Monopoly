@@ -1,3 +1,6 @@
+//
+//	AUTORE: Andrea Sacchetto
+//
 
 #ifndef SPACE_DATA_H
 #define SPACE_DATA_H
