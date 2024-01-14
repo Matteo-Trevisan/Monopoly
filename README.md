@@ -112,7 +112,7 @@ Invece con max_turni = 100 e soldi_al_via = 100:
 - 0 pareggi
 
 ## Istruzioni alla compilazione
-Il progetto è compilato utilizzando CMake; per procedere con la compilazione, seguire le istruzioni di seguito:
+Il progetto è compilabile utilizzando CMake; per procedere con la compilazione, seguire le istruzioni di seguito:
 
 `$ mkdir build`
 
