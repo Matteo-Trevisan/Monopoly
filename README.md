@@ -14,7 +14,8 @@ corso di "Laboratorio di Programmazione" del secondo anno di Ingegneria Informat
 
 ## Struttura del Codice
 
-[Project structure](https://github.com/Matteo-Trevisan/Monopoly/blob/develop/Project_Structure_Canvas.png) (dovuto mettere online per i limiti di peso dell'archivio da conseganre)
+[Project structure](https://github.com/Matteo-Trevisan/Monopoly/blob/develop/Project_Structure_Canvas.png)
+![Project Structure](Project_Structure_Canvas.png)
 
 ## Funzionalità Implementate
 Nel progetto sono state implementate tutte le funzionalità richieste all'interno del file pdf contenente la 
